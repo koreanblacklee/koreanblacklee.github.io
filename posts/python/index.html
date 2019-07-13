@@ -50,104 +50,76 @@
 
         gtag('config', 'UA-73379983-2', {"send_page_view":false});
       }
-      </script><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="shortcut icon" href="/icons/icon-48x48.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#F7A046"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><title data-react-helmet="true">pyJWT를 이용한 Python Django Login Decorator - Blog by John Doe</title><meta data-react-helmet="true" name="description" content="Python3 pyJWT를 이용한 파이썬 로그인 데코레이터 구현"/><meta data-react-helmet="true" property="og:site_name" content="pyJWT를 이용한 Python Django Login Decorator - Blog by John Doe"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="pyJWT를 이용한 Python Django Login Decorator - Blog by John Doe"/><link as="script" rel="preload" href="/webpack-runtime-72145eecae85cffaf632.js"/><link as="script" rel="preload" href="/app-3c78fb05e9e62077b03f.js"/><link as="script" rel="preload" href="/styles-cb0981254158c8774421.js"/><link as="script" rel="preload" href="/1-5dc0f478dda5f6e69181.js"/><link as="script" rel="preload" href="/2-31b556bc2b9ce7d4a85e.js"/><link as="script" rel="preload" href="/component---src-templates-post-template-js-c5572fad95c6506847c9.js"/><link as="fetch" rel="preload" href="/page-data/posts/perfecting-the-art-of-perfection/page-data.json" crossorigin="use-credentials"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="Layout-module--layout--3Pyz6"><div><a class="Post-module--post__home-button--16Kl0" href="/">All Articles</a><div><div class="Content-module--content--3p512"><h1 class="Content-module--content__title--2BDW9">pyJWT를 이용한 Python Django Login Decorator</h1><div class="Content-module--content__body--2TrQ-"><p>(읽기 쉽고, 쉽게 표현하기 위해 경어를 사용한 점 양해부탁드립니다.)</p>
-<p>며칠동안 전전긍긍하던 파이썬 로그인 데코레이터를 완료하였고, 구현하는 과정 및 결과에 대해 포스팅 해보려 한다. 개발을 배우는 입장에서 정리를 하다보니 부족한 부분이 있을 수 있으니 양해바란다.</p>
-<p><img src="/media/image-2.jpg" alt="Nulla faucibus vestibulum eros in tempus. Vestibulum tempor imperdiet velit nec dapibus"></p>
-<p>데코레이터 구현을 위해 인터넷을 계속 찾아다녀봤지만, pyJWT를 이용한 구현은 찾아보기가 힘들었고, 오늘 배운것을 정리하는 것과 pyJWT를 통한 인증구현이 필요한 사람을 위해 정리하려 한다.  </p>
-<p>먼저 JWT는,<br>
-JavaScript를 이용해 유저가 웹사이트에 로그인 한 후에 발생하는 이벤트(댓글, 게시판 글쓰기 등), 여러가지 서비스를 이용하기 위한 권한을 가진 유저인지 확인하기 위해서 많이 쓰이고 있다고 한다.
-총 3개의 구문으로 되어있고, 헤더.내용.서명 으로 이루어져 있다.
-(자세한 내용은 <a href="https://jwt.io/">JWT</a>공식홈페이지나 다른 사이트를 참고해주길 바란다.)</p>
-<p>혹여나 데코레이터가 뭔지 모르는 분들을 위해 설명드리자면,<br>
-대상 함수를 wrapping하고, 이 함수 앞뒤로 꾸며질 구문들에 대해 손쉽게 재사용할 수 있도록 다른 곳에 미리 함수를 만들어 둔 것이라고만 알고 있으면 될 듯 하다. 이번 프로젝트를 예로 들자면, 회원이 댓글작성이나 특정권한을 가지고 있는지 확인하기 위해 데코레이터를 구현했다.<br>
-ex)사용예시</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">@decorator
-def comment:
-  ~~~</code></pre></div>
-<p>(더 전문적인 설명이 필요하다면 <a href="https://www.python.org/dev/peps/pep-0318/">파이썬</a> 공식홈페이지나 구글링을 해보길 권한다.)</p>
-<p>개발순서는 회원가입, 로그인을 이미 구현한 상태이고, 데코레이터를 구현해야 하는데 먼저 목적과 로직을 디테일하게 작성한 내용을 먼저 얘기해보겠다.</p>
-<h3 id="구현하고자-하는-데코레이터의-목적"><a href="#%EA%B5%AC%ED%98%84%ED%95%98%EA%B3%A0%EC%9E%90-%ED%95%98%EB%8A%94-%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0%EC%9D%98-%EB%AA%A9%EC%A0%81" aria-label="구현하고자 하는 데코레이터의 목적 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>구현하고자 하는 데코레이터의 목적</h3>
-<p>웹사이트 상에서 권한(로그인, 혹은 관리자)을 가진 유저만 이용가능한 서비스를 이용할 수 곳에 한해서, 유저가 로그인한 유저인지, 이용가능한 권한을 가진 유저인지(게시판 글쓰기, 관리자페이지 이용권한, 포스팅 작성 등) 등을 확인하기 위해서 미리 선언해 둔 함수를 사용하기 위한 목적 </p>
-<h3 id="세부-로직"><a href="#%EC%84%B8%EB%B6%80-%EB%A1%9C%EC%A7%81" aria-label="세부 로직 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>세부 로직</h3>
-<p>유저로그인: 프론트엔드에게 해당 아이디로 발행한 암호화된 jwt토큰을 전달</p>
-<ol>
-<li>해당유저의 정보를 확인하기 위해 프론트엔드에서 HTTP 헤더를 통해 토큰을 전달 받기<br>
-=>만약 토큰이 없다면 서버에서는 에러코드를 프론트엔드에게 전달하고, 유저의 현재 페이지를 로그인페이지로 이동해달라고 프론트엔드에게 요청</li>
-<li>백엔드는 암호화되어 전달받은 jwt토큰을 decode하고<br>
-=> decode에서 오류가 난다면, 해당 웹페이지에서 발행한 토큰이 아니므로, INVALID_TOKEN 에러를 프론트엔드에게 전달</li>
-<li>Django models.py에 저장된 데이터와 decode한 데이터가 일치하는 회원의 정보를 변수에 저장<br>
-=> 유저의 정보가 없다면, UNKNOWN_USER라는 에러메세지를 프론트엔드에게 전달</li>
-<li>request할 객체에 user변수를 저장하여 프론트엔드에게 전달</li>
-<li>위 내용이 잘 실행되는지 httpie나 다른 방법으로 테스트 및 검증진행</li>
-</ol>
-<p>더 자세한 사항은 코드 밑에 써두도록 하겠다.  </p>
-<h3 id="코딩-순서"><a href="#%EC%BD%94%EB%94%A9-%EC%88%9C%EC%84%9C" aria-label="코딩 순서 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>코딩 순서</h3>
-<p>(세부로직 순서에 맞게 작성)</p>
-<ol start="0">
-<li>pyJWT설치
-<code class="language-text">pip install pyJWT</code> 및 django app디렉토리에서 utils.py 파일 생성</li>
-</ol>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">def login_decorator(func):
-
-    def wrapper(self, request, *args, **kwargs): # self &gt; 받아온 함수를 다시 넘긴다 access token이 헤더에 들어있음&gt; json.load가 아님(헤더에 있는 값만 할 것임) &gt; 키 벨류로 돼있는 양식 &gt; 
-    
-        if &quot;Authorization&quot; not in request.headers: #1)번
-            return JsonResponse({&quot;error_code&quot;:&quot;INVALID_LOGIN&quot;}, status=401)
-        
-        encode_token = request.headers[&quot;Authorization&quot;] 
-
-        try:
-            data = jwt.decode(encode_token, wef_key, algorithm=&#39;HS256&#39;) 
-            #2번)decode를 하게 될 경우 프론트엔드에 전달했던 페이로드값만 나옴(즉 로그인뷰에 바디)
-
-            user = User.objects.get(id = data[&quot;id&quot;])#3번
-            request.user = user #4번
-        except jwt.DecodeError: #2-1번 error
-            return JsonResponse({
-                &quot;error_code&quot; : &quot;INVALID_TOKEN&quot;
-            }, status = 401) # 401에러 : 권한이 없을때 발생
-        except User.DoesNotExist:#1-1번 error
-            return JsonResponse({
-                &quot;error_code&quot; : &quot;UNKNOWN_USER&quot;
-            }, status = 401) # 401에러 : 권한이 없을때 발생
-
-        return func(self, request, *args, **kwargs) #5번
-
-    return wrapper</code></pre></div>
-<ol>
-<li>데코레이터 구현 및 해당 유저 정보 확인
-=> 데코레이터를 만들기 위해 다중 함수 구현, 받은 데이터 중에 토큰이 있는지 if문을 통해 확인
-=> 401에러는 권한이 없을 때 발생</li>
-<li>jwt토큰 decode<br>
-=> 받은 토큰과 기존에 저장해두었던 SECRET_KEY와 algorithm으로 토큰을 decode
-=> decode를 하게 될 경우 프론트엔드에 전달했던 페이로드값만 나옴(즉 로그인뷰에 바디)</li>
-<li>decode한 토큰과 일치하는 유저 정보를 변수에 저장
-=>Query문을 이용해 DB에 접근하여 원하는 데이터를 가져온다
-=>get메소드를 사용할 경우 DB에서 하나의 row만 가지고 옴(가로)</li>
-<li>프론트엔드에게 받은 request.user에 3번의 자료 저장
-=>프론트엔드에게 전달해주기 전 준비과정</li>
-<li>4번에 저장된 request를 데코레이터 리턴<br>
-=> 데코레이터종료 및 프론트엔드에게 해당 유저의 정보를 리턴</li>
-<li>테스트할 변수를 views.py에 테스트변수 만들고, urls를 통해 url을 연결한 후  결과가 잘 나오는지 확인  </li>
-</ol>
-<p><code class="language-text">pip install httpie</code>
-=>views.py에 아래 코드 입력, urls.py에 </p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">#user/views.py
-from user.utils import login_decorator  
-
-class Example(View):
-    @login_decorator
-    def get(self, request):
-        user = User.objects.get(id = 11)
-        return JsonResponse({
-            &#39;user_name&#39;    : user.name            
-        })
-
-#user/urls.py
-from .views import Example
-
-urlpatterns = [
-    path(&#39;/a&#39;, Example.as_view())
-    ]</code></pre></div>
-<h2 id="결론"><a href="#%EA%B2%B0%EB%A1%A0" aria-label="결론 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>결론</h2>
-<p>어떻게 보면 정말 간단한 함수처럼 보이지만 이제 막 개발을 시작하거나 데코레이터를 실전(?)에서 어떻게 써야 하는지 위 자료를 토대로 조금이나마 도움이 됐으면 합니다.</p></div></div></div><div class="Post-module--post__footer--3WzWU"><div><p class="Meta-module--meta__date--29eD7">Published <!-- -->11 Jul 2019</p></div><div class="Tags-module--tags--1L_ct"><ul class="Tags-module--tags__list--91FqN"><li class="Tags-module--tags__list-item--1M30P"><a class="Tags-module--tags__list-item-link--3SL_8" href="/tag/python-3/">Python3</a></li><li class="Tags-module--tags__list-item--1M30P"><a class="Tags-module--tags__list-item-link--3SL_8" href="/tag/wecode/">Wecode</a></li><li class="Tags-module--tags__list-item--1M30P"><a class="Tags-module--tags__list-item-link--3SL_8" href="/tag/django/">Django</a></li></ul></div><div class="Author-module--author--2Yefr"><p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.<a class="Author-module--author__bio-twitter--n-O9n" href="https://www.twitter.com/#" rel="noopener noreferrer" target="_blank"><strong>John Doe</strong> on Twitter</a></p></div></div><div class="Post-module--post__comments--25y6I"></div></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/perfecting-the-art-of-perfection/";window.webpackCompilationHash="355ba2963057fb9aaeea";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-3c78fb05e9e62077b03f.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-7f2fa9be3a21f9751c02.js"],"component---src-templates-not-found-template-js":["/component---src-templates-not-found-template-js-a0b62b38cac4b7e8ba15.js"],"component---src-templates-tags-list-template-js":["/component---src-templates-tags-list-template-js-78300358901183faaffb.js"],"component---src-templates-categories-list-template-js":["/component---src-templates-categories-list-template-js-51d4b645cf707b84ac64.js"],"component---src-templates-post-template-js":["/component---src-templates-post-template-js-c5572fad95c6506847c9.js"],"component---src-templates-page-template-js":["/component---src-templates-page-template-js-f97b8b2aa792e8782a70.js"],"component---src-templates-tag-template-js":["/component---src-templates-tag-template-js-440ee2f184cef3131ea2.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-8c971b64dcc0d1518564.js"],"component---src-templates-index-template-js":["/component---src-templates-index-template-js-df1f4b09b70e5d2c610b.js"]};/*]]>*/</script><script src="/component---src-templates-post-template-js-c5572fad95c6506847c9.js" async=""></script><script src="/2-31b556bc2b9ce7d4a85e.js" async=""></script><script src="/1-5dc0f478dda5f6e69181.js" async=""></script><script src="/styles-cb0981254158c8774421.js" async=""></script><script src="/app-3c78fb05e9e62077b03f.js" async=""></script><script src="/webpack-runtime-72145eecae85cffaf632.js" async=""></script></body></html>
+      </script><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="shortcut icon" href="/icons/icon-48x48.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#F7A046"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=b122a9508eac2fcbe7e615c8fe8ec7af"/><title data-react-helmet="true">Python Foundation - Blog by John Doe</title><meta data-react-helmet="true" name="description" content="Python 기초 문법 정리"/><meta data-react-helmet="true" property="og:site_name" content="Python Foundation - Blog by John Doe"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="Python Foundation - Blog by John Doe"/><link as="script" rel="preload" href="/webpack-runtime-b1f0957c656cd9264bd9.js"/><link as="script" rel="preload" href="/app-72c10f2c766d80707ed1.js"/><link as="script" rel="preload" href="/styles-917d909a3f44ed6bc2e3.js"/><link as="script" rel="preload" href="/1-5dc0f478dda5f6e69181.js"/><link as="script" rel="preload" href="/2-31b556bc2b9ce7d4a85e.js"/><link as="script" rel="preload" href="/component---src-templates-post-template-js-2978726ac2e583b2d7a3.js"/><link as="fetch" rel="preload" href="/page-data/posts/python/page-data.json" crossorigin="use-credentials"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="Layout-module--layout--3Pyz6"><div><a class="Post-module--post__home-button--16Kl0" href="/">All Articles</a><div><div class="Content-module--content--3p512"><h1 class="Content-module--content__title--2BDW9">Python Foundation</h1><div class="Content-module--content__body--2TrQ-"><p>파이썬 홈페이지에선 파이썬 코딩 표준에 관한 문서를 정의해두었고, 기초를 익힌 후 참조하면 코딩스타일을 익히는데 많은 도움이 될 듯 하다<br>
+<a href="https://www.python.org/dev/peps/pep-0008">파이썬 공식홈페이지 코딩스타일 정의</a></p>
+<h4 id="들여쓰기indentation"><a href="#%EB%93%A4%EC%97%AC%EC%93%B0%EA%B8%B0indentation" aria-label="들여쓰기indentation permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>들여쓰기(Indentation)</h4>
+<p>파이썬은 코딩블럭을 표시하기 위해 들여쓰기(Indentation)을 사용하며, 문장을 예로 들어보면 if, for, def 등 끝에 콜론(:)을 사용하면 내부 코딩블럭들은 동일한 들여쓰기를 사용해야 한다.<br>
+일반적으로 공백(스페이스) 4개를 사용하며, 모두 같은 들여쓰기를 쓰지 않고 하나만 5개의 공백을 사용하면 IndentationError가 발생한다.</p>
+<h4 id="표준-라이브러리"><a href="#%ED%91%9C%EC%A4%80-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC" aria-label="표준 라이브러리 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>표준 라이브러리</h4>
+<p>파이썬은 표준라이브러리들을 제공하고 있는데, 불러다 사용하기 위해선 import문을 사용한다.  </p>
+<h4 id="comment"><a href="#comment" aria-label="comment permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comment</h4>
+<p>코딩 외의 설명이나 기타 내용을 작성한 곳에서 사용하는데, 사용위치는 상관없지만, 보통 #사인 뒤에 하나의 공백을 두는 것을 권장한다.</p>
+<h4 id="기본-데이터-타입"><a href="#%EA%B8%B0%EB%B3%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85" aria-label="기본 데이터 타입 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>기본 데이터 타입</h4>
+<p><code class="language-text">int</code>           = 정수형<br>
+<code class="language-text">float</code>         = 소수점을 포함한 실수<br>
+<code class="language-text">bool</code>          = 참, 거짓을 표현<br>
+<code class="language-text">None</code>          = Null과 같은 표현<br>
+<code class="language-text">ComplexNumber</code> = a+bj(파이썬에선 j를 사용함)
+a의 값을 얻기위해선 .real, b의값을 얻으려면 .imag  </p>
+<h4 id="포맷팅-연산자formatting-operator"><a href="#%ED%8F%AC%EB%A7%B7%ED%8C%85-%EC%97%B0%EC%82%B0%EC%9E%90formatting-operator" aria-label="포맷팅 연산자formatting operator permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>포맷팅 연산자(Formatting Operator)</h4>
+<p><code class="language-text">%s</code>	       문자열 (파이썬 객체를 str()을 사용하여 변환)<br>
+<code class="language-text">%r</code>	       문자열 (파이썬 객체를 repr()을 사용하여 변환)<br>
+<code class="language-text">%c</code>	       문자(char)<br>
+<code class="language-text">%d</code> 또는 %i	정수 (int)<br>
+<code class="language-text">%f</code> 또는 %F	부동소수 (float) (%f 소문자 / %F 대문자)<br>
+<code class="language-text">%e</code> 또는 %E	지수형 부동소수 (소문자 / 대문자)<br>
+<code class="language-text">%g</code> 또는 %G	일반형: 값에 따라 %e 혹은 %f 사용 (소문자 / 대문자)<br>
+<code class="language-text">%o</code> 또는 %O	8진수 (소문자 / 대문자)<br>
+<code class="language-text">%x</code> 또는 %X	16진수 (소문자 / 대문자)<br>
+<code class="language-text">%%</code>	       % 퍼센트 리터럴    </p>
+<h4 id="str-metod문자열-메서드"><a href="#str-metod%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%A9%94%EC%84%9C%EB%93%9C" aria-label="str metod문자열 메서드 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Str Metod(문자열 메서드)</h4>
+<p><code class="language-text">str.join()</code> 여러개의 문자열을 하나로 합쳐 줌<br>
+<code class="language-text">str.split()</code> 특정 문자열을 괄호안의 기준으로 분리하여 리스트로 리턴<br>
+<code class="language-text">str.format()</code> 문자열에 포함된 ’{}‘들의 값을 format()의 값으로 대입    </p>
+<h4 id="if-while-for"><a href="#if-while-for" aria-label="if while for permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>if, while, for</h4>
+<p><code class="language-text">if</code> 주로 참과 거짓, 혹은 해당 값인지 확인하기 위해 사용됨<br>
+<code class="language-text">while</code> 조건문이 거짓이 될때까지 계속 실행됨
+<code class="language-text">for</code> 리스트, Tuple, 문자열 등의 인덱스를 하나하나 확인할 때 주로 사용됨( ex) for i in range(a):)<br>
+<code class="language-text">range</code> 반복문과 연동되어 많이 사용됨</p>
+<h4 id="list"><a href="#list" aria-label="list permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List</h4>
+<p>Mutable 데이타 타입으로 여러 요소들을 갖는 집합체며, 추가, 수정, 삭제가 가능함<br>
+Indexing이란 a.[n]과 같이 리스트안의 특정 요소만을 선택하기 위해 사용됨 </p>
+<h4 id="list-method"><a href="#list-method" aria-label="list method permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List Method</h4>
+<p><code class="language-text">slice</code> x = [처음 인덱스:마지막인덱스]와 같이 부분집합의 범위를 지정하여 필요한 데이터만 추출할 수 있음, 만약 처음 인덱스나 마지막 인덱스 중 한가지의 값이 공란으로도 사용가능함<br>
+<code class="language-text">append</code> a.append()로 표현되며, 괄호안의 데이터를 a의 마지막 값을 추가 할 수 있음
+<code class="language-text">del</code> del a[0]과 같이 사용되며, 리스트 중 0번째 데이터를 삭제할 수 있음<br>
+a[1] = 11과 같이 값을 수정할 수도 있음   </p>
+<h4 id="list-기타"><a href="#list-%EA%B8%B0%ED%83%80" aria-label="list 기타 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List 기타</h4>
+<p><code class="language-text">c = a + b</code> a와 b가 리스트라는 가정 하에 2개의 리스트를 하나의 리스트로 병합할 수 있음
+<code class="language-text">x = a * 3</code> x에 a리스트를 3번 반복한 값을 저장함<br>
+<code class="language-text">a = list.index(&#39;&#39;)</code> a변수에 list의 값 중 index괄호 안에 있는 값을 검색해서 저장함
+<code class="language-text">a = list.count(&#39;&#39;)</code> a변수에 list의 값 중 count괄호 안에 있는 값이 몇번 나오는지 저장함
+<code class="language-text">list = [for n in range(5)]</code> 리스트에 for문을 넣어 실행시킬수도 있음</p>
+<h4 id="tuple"><a href="#tuple" aria-label="tuple permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple</h4>
+<p>리스트와 유사하나 새로운값을 추가, 갱신, 삭제할 수 없다 => immutable 데이터 타입<br>
+<code class="language-text">tu = (345,)</code> 만약 튜플의 요소가 하나일 경우 콤마를 사용하면 tuple값으로 저장됨</p>
+<h4 id="tuple-method"><a href="#tuple-method" aria-label="tuple method permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple Method</h4>
+<p>튜플의 값을 변경할 순 없지만, 튜플의 값을 다른 변수에 저장하여 사용할 수 있다.
+<code class="language-text">a = tu[1]</code> 튜플값 중 인덱스가 1인 값을 a변수에 저장함
+<code class="language-text">s = tu[1:]</code>  튜플 값 중 인덱스가 1인 값부터 마지막 값까지 s변수에 저장
+<code class="language-text">c = a + b</code> a와 b가 모두 튜플일 때, c변수에 두개의 데이터를 저장
+<code class="language-text">c = a * 3</code> 리스트와 마찬가지로 a튜플의 값을 3번 반복하여 c에 저장
+<code class="language-text">a, b = (&#39;lee&#39;, &#39;sj&#39;)</code> a튜플에 ‘lee’, b튜플에 ‘sj’를 각각 저장 (lee, sj는 제 이름을 예시로 한것임)</p>
+<h4 id="dictionarydict"><a href="#dictionarydict" aria-label="dictionarydict permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dictionary(dict)</h4>
+<p>{키(Key):값(Value)} 쌍을 요소로 갖는 데이터 타입이며, 키를 이용해서 값을 빠르게 찾을 수 있는 hashtable 구조의 데이터이다. 또한, “dict”클래스로 구현되어 있으며, 키는 수정할 수 없는 immutable타입이어야 함 => 튜플은 키로 쓸 수 있는 반면 리스트는 사용할 수 없음</p>
+<h4 id="입력-추가-수정-삭제-읽기-등"><a href="#%EC%9E%85%EB%A0%A5-%EC%B6%94%EA%B0%80-%EC%88%98%EC%A0%95-%EC%82%AD%EC%A0%9C-%EC%9D%BD%EA%B8%B0-%EB%93%B1" aria-label="입력 추가 수정 삭제 읽기 등 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>입력, 추가, 수정, 삭제, 읽기 등</h4>
+<p><code class="language-text">c = a[&#39;b&#39;]</code> a의 딕셔너리 중 b의 키를 가진 값을 c변수에 저장함
+<code class="language-text">a[&#39;b&#39;] = c</code> c를 a딕셔너리 중 b의 키를 가진 값으로 수정함</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">a = [(&quot;A&quot;,1),(B,2)]
+c = dict(a)</code></pre></div>
+<p>or</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">a = (b=1,c=2)
+c = dict(a)</code></pre></div>
+<p>a의 값을 딕셔너리화하여 c에 저장함(만약 기존 데이터가 있다면, 각 키의 값들은 수정됨)</p>
+<p><code class="language-text">a[&quot;b&quot;] = &quot;c&quot;</code> a딕셔너리 중 b의 키가 없다면 c를 값으로 추가함
+<code class="language-text">del a[&quot;b&quot;]</code> a딕셔너리 중 b의 키를 삭제함(값도 같이 삭제됨)</p></div></div></div><div class="Post-module--post__footer--3WzWU"><div><p class="Meta-module--meta__date--29eD7">Published <!-- -->12 Jul 2019</p></div><div class="Tags-module--tags--1L_ct"><ul class="Tags-module--tags__list--91FqN"><li class="Tags-module--tags__list-item--1M30P"><a class="Tags-module--tags__list-item-link--3SL_8" href="/tag/python-3/">Python3</a></li><li class="Tags-module--tags__list-item--1M30P"><a class="Tags-module--tags__list-item-link--3SL_8" href="/tag/wecode/">Wecode</a></li><li class="Tags-module--tags__list-item--1M30P"><a class="Tags-module--tags__list-item-link--3SL_8" href="/tag/foundation/">Foundation</a></li></ul></div><div class="Author-module--author--2Yefr"><p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.<a class="Author-module--author__bio-twitter--n-O9n" href="https://www.twitter.com/#" rel="noopener noreferrer" target="_blank"><strong>John Doe</strong> on Twitter</a></p></div></div><div class="Post-module--post__comments--25y6I"></div></div></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/python/";window.webpackCompilationHash="2f35dc0f936124335e9b";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-72c10f2c766d80707ed1.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-7f2fa9be3a21f9751c02.js"],"component---src-templates-not-found-template-js":["/component---src-templates-not-found-template-js-a0b62b38cac4b7e8ba15.js"],"component---src-templates-tags-list-template-js":["/component---src-templates-tags-list-template-js-78300358901183faaffb.js"],"component---src-templates-categories-list-template-js":["/component---src-templates-categories-list-template-js-51d4b645cf707b84ac64.js"],"component---src-templates-page-template-js":["/component---src-templates-page-template-js-e2b4d7303ce874257346.js"],"component---src-templates-post-template-js":["/component---src-templates-post-template-js-2978726ac2e583b2d7a3.js"],"component---src-templates-tag-template-js":["/component---src-templates-tag-template-js-440ee2f184cef3131ea2.js"],"component---src-templates-category-template-js":["/component---src-templates-category-template-js-8c971b64dcc0d1518564.js"],"component---src-templates-index-template-js":["/component---src-templates-index-template-js-df1f4b09b70e5d2c610b.js"]};/*]]>*/</script><script src="/component---src-templates-post-template-js-2978726ac2e583b2d7a3.js" async=""></script><script src="/2-31b556bc2b9ce7d4a85e.js" async=""></script><script src="/1-5dc0f478dda5f6e69181.js" async=""></script><script src="/styles-917d909a3f44ed6bc2e3.js" async=""></script><script src="/app-72c10f2c766d80707ed1.js" async=""></script><script src="/webpack-runtime-b1f0957c656cd9264bd9.js" async=""></script></body></html>
