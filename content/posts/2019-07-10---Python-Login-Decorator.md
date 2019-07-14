@@ -3,8 +3,8 @@ title: pyJWT를 이용한 Python Django Login Decorator
 date: "2019-07-10T23:46:37.121Z"
 template: "post"
 draft: false
-slug: "/posts/perfecting-the-art-of-perfection/"
-category: "Design Inspiration"
+slug: "/posts/decorator/"
+category: "Wecode 첫번재 프로젝트(1) Login Decorator"
 tags:
   - "Python3"
   - "Wecode"

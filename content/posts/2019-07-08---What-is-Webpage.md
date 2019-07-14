@@ -3,7 +3,7 @@ title: "gatsby 블로그를 위해 알아야 할 것(1)-웹사이트 발전과�
 date: "2019-07-08T22:12:03.284Z"
 template: "post"
 draft: false
-slug: "/posts/the-birth-of-movable-type/"
+slug: "/posts/webpage"
 category: "Blog"
 tags:
   - "Wework"
