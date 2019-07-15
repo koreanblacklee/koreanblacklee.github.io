@@ -1,4 +1,133 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Sat, 13 Jul 2019 10:02:14 GMT</lastBuildDate><item><title><![CDATA[Python Foundation]]></title><description><![CDATA[Python 기초 문법 정리]]></description><link>http://seung-jae.github.io//posts/python/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/</guid><pubDate>Fri, 12 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;p&gt;파이썬 홈페이지에선 파이썬 코딩 표준에 관한 문서를 정의해두었고, 기초를 익힌 후 참조하면 코딩스타일을 익히는데 많은 도움이 될 듯 하다&lt;br&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Mon, 15 Jul 2019 03:03:18 GMT</lastBuildDate><item><title><![CDATA[Python Foundation2]]></title><description><![CDATA[Python 기초 문법 정리2]]></description><link>http://seung-jae.github.io//posts/python/foundation2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation2</guid><pubDate>Sun, 14 Jul 2019 08:46:37 GMT</pubDate><content:encoded></content:encoded></item><item><title><![CDATA[Django 소셜로그인(google, kakao) 구현]]></title><description><![CDATA[Django + React로 웹사이트를 제작할 때 별도의 라이브러리를 사용하지 않고 구글 및 카카오 소셜로그인을 구현]]></description><link>http://seung-jae.github.io//posts/djangsociallogin/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/djangsociallogin/</guid><pubDate>Sat, 13 Jul 2019 19:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Wecode에서 진행하는 첫번재 프로젝트에서 소셜로그인과 회원가입을 구현해봤다.&lt;br&gt;
+자체 회원가입 및 로그인을 해봤기 때문에 비슷하다고 생각해서 금방 끝날 줄 알았는데 오산이였다. 프론트엔드에서 google과 kakao토큰을 전달받은 후 사용자 정보를 받는 것을 해봤고, 그와 관련된 포스팅을 남긴다.
+(별도의 라이브러리를 이용하지 않아서 코드가 길고 복잡할 수 있으며, 블로그를 보기 전에 충분히 혼자서 고민해보고 어떤 로직으로 돌아가는지 봐줬으면 한다.)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;목차&quot;&gt;&lt;a href=&quot;#%EB%AA%A9%EC%B0%A8&quot; aria-label=&quot;목차 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;목차&lt;/h2&gt;
+&lt;h4 id=&quot;1-소셜로그인이란&quot;&gt;&lt;a href=&quot;#1-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%B4%EB%9E%80&quot; aria-label=&quot;1 소셜로그인이란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. 소셜로그인이란?&lt;/h4&gt;
+&lt;h4 id=&quot;2-소셜로그인-공통&quot;&gt;&lt;a href=&quot;#2-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B3%B5%ED%86%B5&quot; aria-label=&quot;2 소셜로그인 공통 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2. 소셜로그인 공통&lt;/h4&gt;
+&lt;h4 id=&quot;3-구글-소셜-회원가입-및-로그인-구현&quot;&gt;&lt;a href=&quot;#3-%EA%B5%AC%EA%B8%80-%EC%86%8C%EC%85%9C-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84&quot; aria-label=&quot;3 구글 소셜 회원가입 및 로그인 구현 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3. 구글 소셜 회원가입 및 로그인 구현&lt;/h4&gt;
+&lt;h4 id=&quot;4-카카오-소셜-회원가입-및-로그인-구현&quot;&gt;&lt;a href=&quot;#4-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%86%8C%EC%85%9C-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84&quot; aria-label=&quot;4 카카오 소셜 회원가입 및 로그인 구현 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;4. 카카오 소셜 회원가입 및 로그인 구현&lt;/h4&gt;
+&lt;h2 id=&quot;1-소셜로그인이란-1&quot;&gt;&lt;a href=&quot;#1-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8%EC%9D%B4%EB%9E%80-1&quot; aria-label=&quot;1 소셜로그인이란 1 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. 소셜로그인이란?&lt;/h2&gt;
+&lt;p&gt;유저가 별도의 회원가입 없이 유저가 이용하고 있는 소셜 웹사이트의 로그인정보를 사용하여 웹사이트에 로그인계정을 얻게되어 회원으로 접근할 수 있도록 하는 방법.&lt;br&gt;
+즉, 특별한 회원가입의 절차를 거치지 않고 기존에 가입된 소셜 웹사이트의 아이디와 패스워드로 이용하고 싶은 다른 사이트에 로그인 할 수 있는 기능&lt;/p&gt;
+&lt;h4 id=&quot;장점&quot;&gt;&lt;a href=&quot;#%EC%9E%A5%EC%A0%90&quot; aria-label=&quot;장점 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;장점&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;많은 계정과 비밀번호를 기억하지 않아도 되는 편리함을 제공함   &lt;/li&gt;
+&lt;li&gt;해외 소셜을 이용하면 외국인을 대상으로 하는 서비스를 제공하기도 쉬워짐&lt;/li&gt;
+&lt;li&gt;네이버는 네이버 계정으로 가입된 여러 서비스가 나타남&lt;/li&gt;
+&lt;li&gt;서버에 회원의 개인정보를 최소한으로 저장할 수 있음&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;단점&quot;&gt;&lt;a href=&quot;#%EB%8B%A8%EC%A0%90&quot; aria-label=&quot;단점 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;단점&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;소셜계정을 해킹당했거나 소셜계정을 탈퇴한 경우 문제가 생길 수 있음   &lt;/li&gt;
+&lt;li&gt;하나의 소셜을 가입한 뒤 가입한 사실을 모르고 추가로 가입할 수도 있음&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;단점도 있지만 여러가지 장점이 있어서 요즘 대부분의 웹사이트나 앱에서 소셜로그인을 통한 로그인을 많이 사용하고 있다.
+&lt;img src=&quot;/media/social_login.png&quot; alt=&quot;Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;로직순서백엔드-기준&quot;&gt;&lt;a href=&quot;#%EB%A1%9C%EC%A7%81%EC%88%9C%EC%84%9C%EB%B0%B1%EC%97%94%EB%93%9C-%EA%B8%B0%EC%A4%80&quot; aria-label=&quot;로직순서백엔드 기준 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;로직순서(백엔드 기준)&lt;/h4&gt;
+&lt;p&gt;구글, 카카오 등 기본적인 로직순서는 동일하여 한번에 정리함. &lt;/p&gt;
+&lt;p&gt;1)프론트엔드에서 유저의 소셜로그인에 필요한 토큰을 전달받음&lt;br&gt;
+2)받은 토큰을 각각의 소셜 api에 보내서 회원의 정보를 요청&lt;br&gt;
+3)소셜 플랫폼에서 받은 자료를 파이썬에서 활용하기 위해(?) JSON화하여 변수에 저장&lt;br&gt;
+4)JSON화 한 데이터 중 회원의 고유값을 저장하고 있는 키의 값이 DB에 저장되어 있는지 확인&lt;/p&gt;
+&lt;p&gt;4-1)DB에 고유값이 저장되어 있다면, 이미 기존에 가입이 되어 있는 유저이므로, JsonResponse로 Access_token과 정상적으로 처리완료되었고, 프론트엔드에서 필요로 하는 회원의 정보를 프론트엔드에게 전달&lt;br&gt;
+4-2)DB에 고유값이 저장되어 있지 않다면, JSON화한 데이터에서 필요한 자료를 데이터베이스에 저장함과 동시에 프론트엔드에게 JsonResponse로 정상적으로 처리완료되었고, Access Token과 회원의 정보를 전달&lt;/p&gt;
+&lt;h4 id=&quot;2-소셜로그인-공통내용&quot;&gt;&lt;a href=&quot;#2-%EC%86%8C%EC%85%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B3%B5%ED%86%B5%EB%82%B4%EC%9A%A9&quot; aria-label=&quot;2 소셜로그인 공통내용 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2. 소셜로그인 공통내용&lt;/h4&gt;
+&lt;p&gt;1)models.py
+SocialPlatform이라는 새로운 class 생성 후 platform이라는 메소드를 생성(어떤 소셜플랫폼을 이용하여 가입했는지 확인하기 위해)&lt;br&gt;
+기존유저 클래스에 social메소드를 ForeignKey로 메소드 추가
+각 소셜플랫폼의 회원 고유의 정보를 저장항 social_login_id 메소드 추가&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class SocialPlatform(models.Model):
+    platform = models.CharField(max_length=20, default=0)
+
+    class Meta:
+        db_table = &amp;quot;social_platform&amp;quot;
+
+class User(models.Model):
+    ~중략~
+    social          = models.ForeignKey(SocialPlatform, on_delete=models.CASCADE, max_length=20, blank=True, default=1)
+    social_login_id = models.CharField(max_length=50, blank=True)
+    ~중략~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2)urls.py
+구글과 카카오의 소셜로그인 엔드포인트 작성&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;from .views import UserView, LoginView, GoogleLoginView, KakaoLoginView
+urlpatterns = [
+    path(&amp;#39;/login/google&amp;#39;,GoogleLoginView.as_view()),
+    path(&amp;#39;/login/kakao&amp;#39;,KakaoLoginView.as_view())
+]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&quot;3-구글-회원가입-및-로그인-구현&quot;&gt;&lt;a href=&quot;#3-%EA%B5%AC%EA%B8%80-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84&quot; aria-label=&quot;3 구글 회원가입 및 로그인 구현 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3. 구글 회원가입 및 로그인 구현&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&quot;https://developers.google.com/identity/sign-in/web/backend-auth&quot;&gt;구글&lt;/a&gt; 페이지를 확인해보니 이메일이 없을수도 있고, 회원의 고유키값(sub)이 따로 있기 때문에 해당 값을 social&lt;em&gt;login&lt;/em&gt;id에 저장함(각 줄의 코드 뒤에 주석을 달아두었으니 필요하다면 복사하여 메모장이나 에디터에서 확인하면 쉽게 볼 수 있음)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class GoogleLoginView(View):
+    # 소셜로그인을 하면 User테이블에 아이디와 패스워드를 담아두고
+    
+    def get(self,request): # id_token만 해서 헤더로 받기
+        token    = request.headers[&amp;quot;Authorization&amp;quot;] # 프론트엔드에서 HTTP로 들어온 헤더에서 id_token(Authorization)을 변수에 저장
+        url      = &amp;#39;https://oauth2.googleapis.com/tokeninfo?id_token=&amp;#39; # 토큰을 이용해서 회원의 정보를 확인하기 위한 gogle api주소
+        response = requests.get(url+token) #구글에 id_token을 보내 디코딩 요청
+        user     = response.json() # 유저의 정보를 json화해서 변수에 저장
+
+        if User.objects.filter(social_login_id = user[&amp;#39;sub&amp;#39;]).exists(): #기존에 가입했었는지 확인
+            user_info           = User.objects.get(social_login_id=user[&amp;#39;sub&amp;#39;]) # 가입된 데이터를 변수에 저장
+            encoded_jwt         = jwt.encode({&amp;#39;id&amp;#39;: user[&amp;quot;sub&amp;quot;]}, wef_key, algorithm=&amp;#39;HS256&amp;#39;) # jwt토큰 발행
+            none_member_type    = 1
+
+            return JsonResponse({ # 프론트엔드에게 access token과 필요한 데이터 전달
+                &amp;#39;access_token&amp;#39;  : encoded_jwt.decode(&amp;#39;UTF-8&amp;#39;),
+                &amp;#39;user_name&amp;#39;     : user[&amp;#39;name&amp;#39;],
+                &amp;#39;user_type&amp;#39;     : none_member_type,
+                &amp;#39;user_pk&amp;#39;       : user_info.id
+            }, status = 200)            
+        else:
+            new_user_info = User( # 처음으로 소셜로그인을 했을 경우 회원으 정보를 저장(email이 없을 수도 있다 하여, 있으면 저장하고, 없으면 None으로 표기)
+                social_login_id = user[&amp;#39;sub&amp;#39;],
+                name            = user[&amp;#39;name&amp;#39;],
+                social          = SocialPlatform.objects.get(platform =&amp;quot;google&amp;quot;),
+                email           = user.get(&amp;#39;email&amp;#39;, None)
+            )
+            new_user_info.save() # DB에 저장
+            encoded_jwt         = jwt.encode({&amp;#39;id&amp;#39;: new_user_info.id}, wef_key, algorithm=&amp;#39;HS256&amp;#39;) # jwt토큰 발행
+        
+            return JsonResponse({ # DB에 저장된 회원의 정보를 access token과 같이 프론트엔드에게 전달
+            &amp;#39;access_token&amp;#39;      : encoded_jwt.decode(&amp;#39;UTF-8&amp;#39;),
+            &amp;#39;user_name&amp;#39;         : new_user_info.name,
+            &amp;#39;user_type&amp;#39;         : none_member_type,
+            &amp;#39;user_pk&amp;#39;           : new_user_info.id,
+            }, status = 200)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&quot;4-카카오-회원가입-및-로그인-구현&quot;&gt;&lt;a href=&quot;#4-%EC%B9%B4%EC%B9%B4%EC%98%A4-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EB%B0%8F-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84&quot; aria-label=&quot;4 카카오 회원가입 및 로그인 구현 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;4. 카카오 회원가입 및 로그인 구현&lt;/h4&gt;
+&lt;p&gt;기본적으로 구글 소셜로그인과 비슷하기 때문에 추가 설명은 생략하겟음.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class KakaoLoginView(View): #카카오 로그인
+
+    def get(self, request):
+        access_token = request.headers[&amp;quot;Authorization&amp;quot;]
+        headers      =({&amp;#39;Authorization&amp;#39; : f&amp;quot;Bearer {access_token}&amp;quot;})
+        url          = &amp;quot;https://kapi.kakao.com/v1/user/me&amp;quot; # Authorization(프론트에서 받은 토큰)을 이용해서 회원의 정보를 확인하기 위한 카카오 API 주소
+        response     = requests.request(&amp;quot;POST&amp;quot;, url, headers=headers) # API를 요청하여 회원의 정보를 response에 저장
+        user         = response.json()
+
+        if User.objects.filter(social_login_id = user[&amp;#39;id&amp;#39;]).exists(): #기존에 소셜로그인을 했었는지 확인
+            user_info          = User.objects.get(social_login_id=user[&amp;#39;id&amp;#39;])
+            encoded_jwt        = jwt.encode({&amp;#39;id&amp;#39;: user_info.id}, wef_key, algorithm=&amp;#39;HS256&amp;#39;) # jwt토큰 발행
+
+            return JsonResponse({ #jwt토큰, 이름, 타입 프론트엔드에 전달
+                &amp;#39;access_token&amp;#39; : encoded_jwt.decode(&amp;#39;UTF-8&amp;#39;),
+                &amp;#39;user_name&amp;#39;    : user_info.name,
+                &amp;#39;user_pk&amp;#39;      : user_info.id
+            }, status = 200)            
+        else:
+            new_user_info = User(
+                social_login_id = user[&amp;#39;id&amp;#39;],
+                name            = user[&amp;#39;properties&amp;#39;][&amp;#39;nickname&amp;#39;],
+                social          = SocialPlatform.objects.get(platform =&amp;quot;kakao&amp;quot;),
+                email           = user[&amp;#39;properties&amp;#39;].get(&amp;#39;email&amp;#39;, None)
+            )
+            new_user_info.save()
+            encoded_jwt         = jwt.encode({&amp;#39;id&amp;#39;: new_user_info.id}, wef_key, algorithm=&amp;#39;HS256&amp;#39;) # jwt토큰 발행
+            none_member_type    = 1
+            return JsonResponse({
+                &amp;#39;access_token&amp;#39; : encoded_jwt.decode(&amp;#39;UTF-8&amp;#39;),
+                &amp;#39;user_name&amp;#39;    : new_user_info.name,
+                &amp;#39;user_pk&amp;#39;      : new_user_info.id,
+                }, status = 200)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Python Foundation1]]></title><description><![CDATA[Python 기초 문법 정리]]></description><link>http://seung-jae.github.io//posts/python/foundation1</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation1</guid><pubDate>Fri, 12 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;p&gt;파이썬 홈페이지에선 파이썬 코딩 표준에 관한 문서를 정의해두었고, 기초를 익힌 후 참조하면 코딩스타일을 익히는데 많은 도움이 될 듯 하다&lt;br&gt;
 &lt;a href=&quot;https://www.python.org/dev/peps/pep-0008&quot;&gt;파이썬 공식홈페이지 코딩스타일 정의&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&quot;들여쓰기indentation&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%97%AC%EC%93%B0%EA%B8%B0indentation&quot; aria-label=&quot;들여쓰기indentation permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들여쓰기(Indentation)&lt;/h4&gt;
 &lt;p&gt;파이썬은 코딩블럭을 표시하기 위해 들여쓰기(Indentation)을 사용하며, 문장을 예로 들어보면 if, for, def 등 끝에 콜론(:)을 사용하면 내부 코딩블럭들은 동일한 들여쓰기를 사용해야 한다.&lt;br&gt;
@@ -70,7 +199,15 @@ c = dict(a)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 c = dict(a)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;a의 값을 딕셔너리화하여 c에 저장함(만약 기존 데이터가 있다면, 각 키의 값들은 수정됨)&lt;/p&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;a[&amp;quot;b&amp;quot;] = &amp;quot;c&amp;quot;&lt;/code&gt; a딕셔너리 중 b의 키가 없다면 c를 값으로 추가함
-&lt;code class=&quot;language-text&quot;&gt;del a[&amp;quot;b&amp;quot;]&lt;/code&gt; a딕셔너리 중 b의 키를 삭제함(값도 같이 삭제됨)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[pyJWT를 이용한 Python Django Login Decorator]]></title><description><![CDATA[Python3 pyJWT를 이용한 파이썬 로그인 데코레이터 구현]]></description><link>http://seung-jae.github.io//posts/decorator/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/decorator/</guid><pubDate>Wed, 10 Jul 2019 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;(읽기 쉽고, 쉽게 표현하기 위해 경어를 사용한 점 양해부탁드립니다.)&lt;/p&gt;
+&lt;code class=&quot;language-text&quot;&gt;del a[&amp;quot;b&amp;quot;]&lt;/code&gt; a딕셔너리 중 b의 키를 삭제함(값도 같이 삭제됨)&lt;/p&gt;
+&lt;h4 id=&quot;dict-method&quot;&gt;&lt;a href=&quot;#dict-method&quot; aria-label=&quot;dict method permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;dict Method&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;dict.keys()&lt;/code&gt; =&gt; “dict”에 저장된 키값들을 리턴&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;dict.values()&lt;/code&gt; =&gt; “dict”에 저장된 값들을 리턴&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;dict.items()&lt;/code&gt; =&gt; “dict”의 키와 값을 dict&lt;em&gt;items 객체로 리턴함(dict&lt;/em&gt;items를 리스트로 변환하기 위해서는 list()를 사용하면 됨 ex) itemlist = list(items)&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;dict.get(&amp;quot;key&amp;quot;)&lt;/code&gt; =&gt; 키의 값을 리턴하는건 동일하지만, 키가 없을 경우 None을 리턴하므로 더 유용하게 사용할 수 있다.(&lt;code class=&quot;language-text&quot;&gt;dict[&amp;quot;key&amp;quot;]&lt;/code&gt;를 하게 될 경우 에러메세지가 출력됨)&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;if &amp;quot;key_name&amp;quot; in dict:&lt;/code&gt; =&gt; dict에 key_name이 있는지 확인&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;dict.clear()&lt;/code&gt; =&gt; dict의 키와 값을 모두 삭제&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;dict.update({key_name1: value1, key_name2:value2})&lt;/code&gt; =&gt; dict에서 key&lt;em&gt;name1,key&lt;/em&gt;name2의 값을 각각 수정할 때 사용됨&lt;/p&gt;</content:encoded></item><item><title><![CDATA[pyJWT를 이용한 Python Django Login Decorator]]></title><description><![CDATA[Python3 pyJWT를 이용한 파이썬 로그인 데코레이터 구현]]></description><link>http://seung-jae.github.io//posts/decorator/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/decorator/</guid><pubDate>Wed, 10 Jul 2019 23:46:37 GMT</pubDate><content:encoded>&lt;p&gt;(읽기 쉽고, 쉽게 표현하기 위해 경어를 사용한 점 양해부탁드립니다.)&lt;/p&gt;
 &lt;p&gt;며칠동안 전전긍긍하던 파이썬 로그인 데코레이터를 완료하였고, 구현하는 과정 및 결과에 대해 포스팅 해보려 한다. 개발을 배우는 입장에서 정리를 하다보니 부족한 부분이 있을 수 있으니 양해바란다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/media/image-2.jpg&quot; alt=&quot;Nulla faucibus vestibulum eros in tempus. Vestibulum tempor imperdiet velit nec dapibus&quot;&gt;&lt;/p&gt;
 &lt;p&gt;데코레이터 구현을 위해 인터넷을 계속 찾아다녀봤지만, pyJWT를 이용한 구현은 찾아보기가 힘들었고, 오늘 배운것을 정리하는 것과 pyJWT를 통한 인증구현이 필요한 사람을 위해 정리하려 한다.  &lt;/p&gt;
