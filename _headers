@@ -71,13 +71,6 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </3-31af421da038b5525ea4.js>; rel=preload; as=script
   Link: </component---src-templates-categories-list-template-js-51d4b645cf707b84ac64.js>; rel=preload; as=script
-/pages/about/
-  Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
-  Link: </component---src-templates-page-template-js-6bb813a130615f5f8c11.js>; rel=preload; as=script
 /pages/contacts/
   Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
@@ -85,23 +78,14 @@
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </component---src-templates-page-template-js-6bb813a130615f5f8c11.js>; rel=preload; as=script
-/posts/decorator/
+/pages/about/
   Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
-  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
-  Link: </component---src-templates-post-template-js-8cd8b87ec520813c928e.js>; rel=preload; as=script
-/posts/webpage
-  Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
-  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
-  Link: </component---src-templates-post-template-js-8cd8b87ec520813c928e.js>; rel=preload; as=script
-/posts/djangsociallogin/
+  Link: </component---src-templates-page-template-js-6bb813a130615f5f8c11.js>; rel=preload; as=script
+/posts/python/foundation1
   Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
@@ -117,6 +101,22 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-8cd8b87ec520813c928e.js>; rel=preload; as=script
+/posts/webpage
+  Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
+  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
+  Link: </component---src-templates-post-template-js-8cd8b87ec520813c928e.js>; rel=preload; as=script
+/posts/decorator/
+  Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
+  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
+  Link: </component---src-templates-post-template-js-8cd8b87ec520813c928e.js>; rel=preload; as=script
 /posts/python/foundation2
   Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
@@ -125,7 +125,7 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-8cd8b87ec520813c928e.js>; rel=preload; as=script
-/posts/python/foundation1
+/posts/djangsociallogin/
   Link: </webpack-runtime-73e6c65e6df18d15fd34.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
