@@ -1,4 +1,162 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Mon, 15 Jul 2019 23:16:21 GMT</lastBuildDate><item><title><![CDATA[Python Foundation2]]></title><description><![CDATA[Python 기초 문법 정리2]]></description><link>http://seung-jae.github.io//posts/python/foundation2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation2</guid><pubDate>Sun, 14 Jul 2019 08:46:37 GMT</pubDate><content:encoded></content:encoded></item><item><title><![CDATA[Django 소셜로그인(google, kakao) 구현]]></title><description><![CDATA[Django + React로 웹사이트를 제작할 때 별도의 라이브러리를 사용하지 않고 구글 및 카카오 소셜로그인을 구현]]></description><link>http://seung-jae.github.io//posts/djangsociallogin/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/djangsociallogin/</guid><pubDate>Sat, 13 Jul 2019 19:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Wecode에서 진행하는 첫번재 프로젝트에서 소셜로그인과 회원가입을 구현해봤다.&lt;br&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Wed, 17 Jul 2019 01:03:13 GMT</lastBuildDate><item><title><![CDATA[Python Class - 사용법]]></title><description><![CDATA[Python Class - How to use]]></description><link>http://seung-jae.github.io//posts/python/class2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/class2</guid><pubDate>Wed, 17 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;h2 id=&quot;클래스-사용법&quot;&gt;&lt;a href=&quot;#%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;클래스 사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;클래스 사용법&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;전 시간에 클래스에 대해 알아봤는데, 이번엔 어떻게 써야 할지에 대해 자세히 알아보고자 한다.  &lt;/p&gt;
+&lt;p&gt;클래스 객체는 어트리뷰트 참조(클래스 내부의 변수나 함수에 접근)와 인스턴스(실체화)를 만든다&lt;/p&gt;
+&lt;p&gt;메소드에 &lt;code class=&quot;language-text&quot;&gt;__&lt;/code&gt;의 사용은 2가지로 나뉜다.  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;init과 같은 특별한 메소드를 사용해야 할 때(메소드의 종류나 사용법이 궁금하다면 이 &lt;a href=&quot;https://corikachu.github.io/articles/python/python-magic-method&quot;&gt;페이지&lt;/a&gt;를 참고하거나, 구글링을 하면 더 많은 정보가 나와있다.)  &lt;/li&gt;
+&lt;li&gt;맹글링을 위한 메소드  &lt;/li&gt;
+&lt;li&gt;맹글링이란 컴파일러나 인터프리터가 변수나 함수명을 일정한 규칙에 의해 변형시키는 것을 의&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#Attribute
+classname.variable          #변수일 경우 호출 방법
+classname.function(input)   #메서드(함수)일 경우 호출 방법
+
+#Instance
+#x = classname()            #instance 생성&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class Flight:
+
+    def __init__(self):
+        print(&amp;#39;init&amp;#39;)
+        super().__init__()
+
+    def __new__(cls):
+        print(&amp;#39;new&amp;#39;)
+        return super().__new__(cls)
+
+    def number(self):
+        return &amp;#39;SN060&amp;#39;
+
+from airtravel import Flight
+f = Flight()
+new
+init&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;calss Dog:                    # CamelCase로 첫글자 대문자로 클래스 선언
+    
+    kind   = &amp;#39;canine&amp;#39;           # 변수선언(공유됨)
+    tricks = []
+
+    def __init__(self, name): # 인스턴스에 따라 값이 변함
+        self.name = name
+
+    def add_trick(self, trick):
+        self.tricks.append(trick)
+
+&amp;gt;&amp;gt;&amp;gt; d = Dog(&amp;#39;Fido&amp;#39;)   # d 인스턴스 생성
+&amp;gt;&amp;gt;&amp;gt; e = Dog(&amp;#39;Buddy&amp;#39;)  # e 인스턴스 생성
+&amp;gt;&amp;gt;&amp;gt; d.kind            # 변수 kind 호출
+&amp;#39;canine&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; e.kind            # 변수 kind 호출 == d와 같은 값
+&amp;#39;canine&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; d.name            # 메소드 호출 == 인풋 데이터를 name에 넣음
+&amp;#39;Fido&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; e.name            # 메소드 호출 =&amp;gt; 인풋 데이터를 name에 넣음
+&amp;#39;Buddy&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; d.add_trick(&amp;#39;roll over&amp;#39;)
+&amp;gt;&amp;gt;&amp;gt; e.add_trick(&amp;#39;play dead&amp;#39;)
+&amp;gt;&amp;gt;&amp;gt; d.tricks
+[&amp;#39;roll over&amp;#39;, &amp;#39;play dead&amp;#39;] &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;클래스를 선언  &lt;/li&gt;
+&lt;li&gt;Attribute 작성  &lt;/li&gt;
+&lt;li&gt;instance 생성(d, e)  &lt;/li&gt;
+&lt;li&gt;instance.Attribute로 호출 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;주의사항: 위 add_trick과 같이 list를 사용하게 되면 리스트의 값은 공유되기 때문에  초기화자(&lt;strong&gt;init&lt;/strong&gt;)에 빈 list를 추가해두어야 한다. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class Dog:
+    ~ 중략~
+    def __init__(self, name):
+        self.name  = name
+        self.tricks = []
+    ~ 중략 ~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;주의사항&quot;&gt;&lt;a href=&quot;#%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD&quot; aria-label=&quot;주의사항 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;주의사항&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;데이터 Attribute(이하 ‘속성’)은 같은 이름의 메서드를 덮어쓰기 떄문에 의도하지 않게 충돌이 될 수 있다. 메서드에는 동사를, 속성에는 명사를 쓰는 것이 좋다.  &lt;/li&gt;
+&lt;li&gt;파이썬코드는 숨기는 기능이 없기 때문에 클라이언트가 참조될 수도 있다.  &lt;/li&gt;
+&lt;li&gt;메서드는 일반 함수들과 마찬가지로 전역 이름을 참조할 수 있기 때문에 헷갈리지 않게 조심하자.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class Flight:
+
+    def __init__(self, number):
+        if not number[:2].isalpha():
+            raise ValueError(&amp;quot;첫 두글자가 알파벳이 아닙니다.&amp;quot;)
+        if not number[:2].isupper():
+            raise ValueError(&amp;quot;첫 두글자가 대문자가 아닙니다.&amp;quot;)
+        if not number[2:].isdigit():
+            raise ValueError(&amp;quot;세번째 글자 이상이 양의 숫자가 아닙니다.&amp;quot;)
+        self.__number = number
+
+    def number(self):
+        return self.__number&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;_name&lt;/code&gt;의 경우 외부에서 호출이 가능하지만, 이 함수는 내부에서만 사용하기 위해 정의해 둔 것이라고 생각하면 쉬울 듯 하다. 파이썬을 공부한 사람들이라면, &lt;code class=&quot;language-text&quot;&gt;_&lt;/code&gt;가 붙은 메서드를 호출한다면 권유의 문법이라고 불린다고 한다. 위 예제에서는 외부에서 접근을 못하게 하기 위해 &lt;code class=&quot;language-text&quot;&gt;__&lt;/code&gt;을 사용했다.&lt;br&gt;
+만약 &lt;code class=&quot;language-text&quot;&gt;__name&lt;/code&gt;을 호출하게 될 경우 에러메시지가 나온다.&lt;/p&gt;
+&lt;p&gt;참고 사이트:&lt;br&gt;
+&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://wikidocs.net/16071&quot;&gt;위키독스-파이썬기초&lt;/a&gt;
+&lt;a href=&quot;https://gomguard.tistory.com/125&quot;&gt;곰가드의 라이브러리&lt;/a&gt;  &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python Class]]></title><description><![CDATA[Python Class]]></description><link>http://seung-jae.github.io//posts/python/class</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/class</guid><pubDate>Sun, 14 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;h2 id=&quot;클래스란&quot;&gt;&lt;a href=&quot;#%ED%81%B4%EB%9E%98%EC%8A%A4%EB%9E%80&quot; aria-label=&quot;클래스란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;클래스란?&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;
+하나의 틀을 만들고, 메서드(클래스안에 정의된 함수)를 통해 인스턴스(실체)를 만들 수 있도록 하는 것. 또한, 이미 선언된 클래스를 다른 클래스로 상속하여 클래스의 내용을 추가하거나 수정하여 인스턴스를 생성할 수 있음&lt;br&gt;
+객체 지향형 프로그래밍의 모든 표준 기능들을 제공   &lt;/p&gt;
+&lt;p&gt;요약: 어떤 문제를 해결하기 위한 데이터를 만들고, 추상화를 거쳐 집단에 속하는 속성(attribute)과 행위(behavior)를 통한 변수와 메서드로 정의한 것&lt;/p&gt;
+&lt;h3 id=&quot;사용법&quot;&gt;&lt;a href=&quot;#%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;사용법&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;기본적으로 클래스 정의로 인해  만들어진 지역스코프에 여러 함수 및 변수를 담아서 사용&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&quot;0&quot;&gt;
+&lt;li&gt;CamelCase를 통해 단어의 첫 문자를 대문자로 구분을 해서 사용&lt;/li&gt;
+&lt;li&gt;다른 함수(def)나 if문 처럼 먼저 클래스에 대해 정의를 해야 함.  &lt;/li&gt;
+&lt;li&gt;클래스의 내부 문장들은 보통 함수들로 정의되어 있지만, 다른 문장들도 사용할 수 있음(내부 함수들이 받는 parameter는 무조건 ‘self’이며, 이는 클래스 외부에서 호출한 인자를 받는다는 의미인 듯 하다.)   &lt;/li&gt;
+&lt;li&gt;들여쓰기를 통한 지역스코프를 활용하여 환경변수 중 지역변수로 사용  &lt;/li&gt;
+&lt;li&gt;클래스 정의가 다 되었다면, 클래스 객체가 만들어 진 것임  &lt;/li&gt;
+&lt;li&gt;사용하고 싶은 위치에서 인자를 활용해서 사용(인자가 없을 수도 있음)  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;예시)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;class Dog:
+    
+    kind = &amp;#39;canine&amp;#39;
+
+    def __init__(self, name):
+        self.name = name
+
+d = Dog(&amp;#39;Fibo&amp;#39;)
+e = Dog(&amp;#39;Buddy&amp;#39;)
+d.kind           # &amp;#39;canine&amp;#39;
+e.kind           # &amp;#39;canine&amp;#39;
+d.name           # &amp;#39;Fido&amp;#39;
+e.name           # &amp;#39;Buddy&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;용어-정리&quot;&gt;&lt;a href=&quot;#%EC%9A%A9%EC%96%B4-%EC%A0%95%EB%A6%AC&quot; aria-label=&quot;용어 정리 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;용어 정리&lt;/h2&gt;
+&lt;p&gt;면접 때 많이들 물어본다고 하니 꼭 알아두자.  &lt;/p&gt;
+&lt;h3 id=&quot;객체지향프로그래밍이란&quot;&gt;&lt;a href=&quot;#%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80&quot; aria-label=&quot;객체지향프로그래밍이란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;객체지향프로그래밍이란?&lt;/h3&gt;
+&lt;p&gt;컴퓨터 프로그램밍 패러다임 중 하나로, 프로그래밍에서 필요한 데이터를 추상화시켜 상태와 행위를 가진 객체를 만들고, 그 객체들 간의 유기적인 상호작용을 통해 로직을 구성하는 프로그래밍 방법&lt;/p&gt;
+&lt;h4 id=&quot;객체인스턴스란&quot;&gt;&lt;a href=&quot;#%EA%B0%9D%EC%B2%B4%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EB%9E%80&quot; aria-label=&quot;객체인스턴스란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;객체(인스턴스)란?&lt;/h4&gt;
+&lt;p&gt;클래스에서 정의한 것을 토대로 실제 메모리상에 할당된 것으로 실제 프로그램에서 사용되는 데이터(실체화 된 데이터)&lt;/p&gt;
+&lt;h4 id=&quot;객체지향-프로그래밍에서의-추상화자료의-추상화&quot;&gt;&lt;a href=&quot;#%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%97%90%EC%84%9C%EC%9D%98-%EC%B6%94%EC%83%81%ED%99%94%EC%9E%90%EB%A3%8C%EC%9D%98-%EC%B6%94%EC%83%81%ED%99%94&quot; aria-label=&quot;객체지향 프로그래밍에서의 추상화자료의 추상화 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;객체지향 프로그래밍에서의 추상화(자료의 추상화)&lt;/h4&gt;
+&lt;p&gt;불필요한 정보는 놔두고, 중요하거나 필요한 정보만을 표현하여 공통의 속성이나 기능을 묶어 이름을 붙이는 것(클래스를 정의하는 것)&lt;/p&gt;
+&lt;h4 id=&quot;캡슐화란&quot;&gt;&lt;a href=&quot;#%EC%BA%A1%EC%8A%90%ED%99%94%EB%9E%80&quot; aria-label=&quot;캡슐화란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;캡슐화란?&lt;/h4&gt;
+&lt;p&gt;목적: 코드를 재수정없이 재활용하는 것&lt;br&gt;
+프로그램 코드에서 변수와 함수를 재활용하기에는 데이터가 분산되어 있어서 재활용이 어려웠으나 캡슐화를 통해 관련된 기능과 특성을 한곳에 모아 분류하기 때문에 재활용이 원활해짐&lt;br&gt;
+(기능과 특성의 모음을 “클래스”라는 “캡슐”에 분류해서 넣는 것)&lt;/p&gt;
+&lt;h4 id=&quot;상속이란&quot;&gt;&lt;a href=&quot;#%EC%83%81%EC%86%8D%EC%9D%B4%EB%9E%80&quot; aria-label=&quot;상속이란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;상속이란?&lt;/h4&gt;
+&lt;p&gt;라이브러리(다른사람이 작성한 소스코드를 사용하기 위한 참조하여 사용하는 모임)의 코드를 수정하게 되면 다른 라이브러리가 되고, 버전에 따라 동작하지 않을 수 있고, 불필요한 코드의 수정작업을 해야 할 때가 있다. 이러한 문제를 해결하기 위해 &lt;code class=&quot;language-text&quot;&gt;상속&lt;/code&gt;이라는 것을 도입   &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h3 id=&quot;부모클래스의-속성과-기능을-그대로-이어받아-사용할-수-있게하고-기능의-일부분을-변경해야-할-경우-상속받은-자식-클래스에서-해당-기능만-수정정의하여-사용할-수-있게-하는-것&quot;&gt;&lt;a href=&quot;#%EB%B6%80%EB%AA%A8%ED%81%B4%EB%9E%98%EC%8A%A4%EC%9D%98-%EC%86%8D%EC%84%B1%EA%B3%BC-%EA%B8%B0%EB%8A%A5%EC%9D%84-%EA%B7%B8%EB%8C%80%EB%A1%9C-%EC%9D%B4%EC%96%B4%EB%B0%9B%EC%95%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C%ED%95%98%EA%B3%A0-%EA%B8%B0%EB%8A%A5%EC%9D%98-%EC%9D%BC%EB%B6%80%EB%B6%84%EC%9D%84-%EB%B3%80%EA%B2%BD%ED%95%B4%EC%95%BC-%ED%95%A0-%EA%B2%BD%EC%9A%B0-%EC%83%81%EC%86%8D%EB%B0%9B%EC%9D%80-%EC%9E%90%EC%8B%9D-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90%EC%84%9C-%ED%95%B4%EB%8B%B9-%EA%B8%B0%EB%8A%A5%EB%A7%8C-%EC%88%98%EC%A0%95%EC%A0%95%EC%9D%98%ED%95%98%EC%97%AC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%ED%95%98%EB%8A%94-%EA%B2%83&quot; aria-label=&quot;부모클래스의 속성과 기능을 그대로 이어받아 사용할 수 있게하고 기능의 일부분을 변경해야 할 경우 상속받은 자식 클래스에서 해당 기능만 수정정의하여 사용할 수 있게 하는 것 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;부모클래스의 속성과 기능을 그대로 이어받아 사용할 수 있게하고, 기능의 일부분을 변경해야 할 경우 상속받은 자식 클래스에서 해당 기능만 수정(정의)하여 사용할 수 있게 하는 것&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;h4 id=&quot;다중상속을-하게-될-경우-상속관계에서-혼란을-줄-수-있어서-하나만-가능하고-필요에-따라-인터페이스를-사용할-수-있게-했다&quot;&gt;&lt;a href=&quot;#%EB%8B%A4%EC%A4%91%EC%83%81%EC%86%8D%EC%9D%84-%ED%95%98%EA%B2%8C-%EB%90%A0-%EA%B2%BD%EC%9A%B0-%EC%83%81%EC%86%8D%EA%B4%80%EA%B3%84%EC%97%90%EC%84%9C-%ED%98%BC%EB%9E%80%EC%9D%84-%EC%A4%84-%EC%88%98-%EC%9E%88%EC%96%B4%EC%84%9C-%ED%95%98%EB%82%98%EB%A7%8C-%EA%B0%80%EB%8A%A5%ED%95%98%EA%B3%A0-%ED%95%84%EC%9A%94%EC%97%90-%EB%94%B0%EB%9D%BC-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%ED%96%88%EB%8B%A4&quot; aria-label=&quot;다중상속을 하게 될 경우 상속관계에서 혼란을 줄 수 있어서 하나만 가능하고 필요에 따라 인터페이스를 사용할 수 있게 했다 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;다중상속을 하게 될 경우 상속관계에서 혼란을 줄 수 있어서 하나만 가능하고, 필요에 따라 인터페이스를 사용할 수 있게 했다.&lt;/h4&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;다형성이란&quot;&gt;&lt;a href=&quot;#%EB%8B%A4%ED%98%95%EC%84%B1%EC%9D%B4%EB%9E%80&quot; aria-label=&quot;다형성이란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;다형성이란?&lt;/h4&gt;
+&lt;p&gt;하나의 변수명, 함수명 등이 상황에 따라 다른 의미로 해석될 수 있는 것  &lt;/p&gt;
+&lt;p&gt;오버라이딩: 부모클래스의 메스드와 같은 이름, 매개변수를 재정의 하는 것(값을 업데이트)&lt;br&gt;
+오버로딩: 같은 이름의 함수를 여러개 정의하고, 매개변수의 타입과 개수를 다르게 하여 매개변수에 따라 다르게 호출할 수 하는 것&lt;/p&gt;
+&lt;p&gt;참고&lt;br&gt;
+&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;    &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://jeong-pro.tistory.com/95?category=793347&quot;&gt;기본기를 쌓는 정아마추어 코딩블로그&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Django 소셜로그인(google, kakao) 구현]]></title><description><![CDATA[Django + React로 웹사이트를 제작할 때 별도의 라이브러리를 사용하지 않고 구글 및 카카오 소셜로그인을 구현]]></description><link>http://seung-jae.github.io//posts/djangsociallogin/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/djangsociallogin/</guid><pubDate>Sat, 13 Jul 2019 19:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Wecode에서 진행하는 첫번재 프로젝트에서 소셜로그인과 회원가입을 구현해봤다.&lt;br&gt;
 자체 회원가입 및 로그인을 해봤기 때문에 비슷하다고 생각해서 금방 끝날 줄 알았는데 오산이였다. 프론트엔드에서 google과 kakao토큰을 전달받은 후 사용자 정보를 받는 것을 해봤고, 그와 관련된 포스팅을 남긴다.
 (별도의 라이브러리를 이용하지 않아서 코드가 길고 복잡할 수 있으며, 블로그를 보기 전에 충분히 혼자서 고민해보고 어떤 로직으로 돌아가는지 봐줬으면 한다.)&lt;/p&gt;
 &lt;hr&gt;
