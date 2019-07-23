@@ -1,10 +1,10 @@
 ---
-title: Python Foundation
+title: Python Foundation1
 date: "2019-07-12T08:46:37.121Z"
 template: "post"
 draft: false
-slug: "/posts/python/"
-category: "Design Inspiration"
+slug: "/posts/python/foundation1"
+category: "Python Foundation1"
 tags:
   - "Python3"
   - "Wecode"
