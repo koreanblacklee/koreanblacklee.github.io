@@ -77,7 +77,18 @@ i)어떠한 데이터를 메모리상의 주소를 이용해서 변수에 저장
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&gt;&gt;&gt; id(a)
 4516974408</code></pre></div>
 <p><code class="language-text">b = a</code>를 실행할 경우 같은 주소를 가지고 있다.  </p>
-<h4 id="2-변수를-만드는-방법"><a href="#2-%EB%B3%80%EC%88%98%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95" aria-label="2 변수를 만드는 방법 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2) 변수를 만드는 방법</h4>
+<h4 id="2-변수를-사용하는-이유와-변수를-사용해야-할-경우"><a href="#2-%EB%B3%80%EC%88%98%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0%EC%99%80-%EB%B3%80%EC%88%98%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC-%ED%95%A0-%EA%B2%BD%EC%9A%B0" aria-label="2 변수를 사용하는 이유와 변수를 사용해야 할 경우 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2) 변수를 사용하는 이유와 변수를 사용해야 할 경우</h4>
+<ul>
+<li>
+<p>사용하는 이유</p>
+<ul>
+<li>객체가 어떤 의미를 가지는지와 어떤 목적으로 생성된 객체인지 코드에서 알기 쉽게 할 수 있다.</li>
+<li>특정값을 변수에 저장해두기 때문에 재사용성이 용이하다.</li>
+<li>파이썬에서 모든것들은 객체이며, 객체의 속성값들을 포함한 정보가 생성된다는 이야기다. 생성된 객체는 빠르게 연산되어야 하기 때문에 메모리에 저장되며, 메모리는 물리적 공간의 제한이 있기 때문에 객체가 사용되지 않으면 파이썬 내부의 GC(garbage collector)가 자동으로 중간중간 제거하는데, 변수에 객체를 참조하고 있다면 지우지 않고 남아있는다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-변수를-만드는-방법"><a href="#3-%EB%B3%80%EC%88%98%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95" aria-label="3 변수를 만드는 방법 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3) 변수를 만드는 방법</h4>
 <p>먼저 선언된 변수명에 다른 값을 바인딩하게 되면 해당 변수의 값은 변경된다.  </p>
 <p>256까지의 숫자는 자주 사용되므로 각각의 변수에 저장 후 메모리 주소를 확인해보면 동일한 메모리 주소를 가지고 있지만 257부터 변수를 통해 <code class="language-text">id</code>를 호출해보면 서로다른 객채가 생성된 것을 확인할 수 있다.</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&gt;&gt;&gt; a = 1
@@ -97,7 +108,7 @@ i)어떠한 데이터를 메모리상의 주소를 이용해서 변수에 저장
 5
 &gt;&gt;&gt; b
 3</code></pre></div>
-<h4 id="3-변수명-사용시-고려사항"><a href="#3-%EB%B3%80%EC%88%98%EB%AA%85-%EC%82%AC%EC%9A%A9%EC%8B%9C-%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD" aria-label="3 변수명 사용시 고려사항 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3) 변수명 사용시 고려사항</h4>
+<h4 id="4-변수명-사용시-고려사항"><a href="#4-%EB%B3%80%EC%88%98%EB%AA%85-%EC%82%AC%EC%9A%A9%EC%8B%9C-%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD" aria-label="4 변수명 사용시 고려사항 permalink" class="anchor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4) 변수명 사용시 고려사항</h4>
 <p>변수를 선언할 때 변수명은 잘 정해야 한다.<br>
 어떠한 값을 사용하기 위해서 변수에 저장했는데, 이름과 값이 매칭이 안될 경우 추후 사용하는데 어려움이 있고, 다른 개발자가 봤을때도 해당 변수가 어떤 값을 저장해두었는지 예상할 수 있도록 <code class="language-text">가시성</code>에도 신경써야 한다. 영어 또는 언더스코어로 시작을 해야 하며, 숫자로 시작할 경우 아래와 같이 오류메세지가 발생한다.   </p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">&gt;&gt;&gt; 1naver = 60

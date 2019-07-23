@@ -85,22 +85,6 @@
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </component---src-templates-page-template-js-a568bac5a037bd5190ee.js>; rel=preload; as=script
-/posts/markdownlanguage/
-  Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
-  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
-  Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
-/posts/python/foundation1
-  Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
-  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
-  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
-  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
-  Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
 /posts/webpage
   Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
@@ -117,7 +101,7 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
-/posts/python/class
+/posts/markdownlanguage/
   Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
@@ -133,7 +117,7 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
-/posts/python/class2
+/posts/python/foundation1
   Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
@@ -141,7 +125,15 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
-/posts/python/foundation3
+/posts/python/class
+  Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
+  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
+  Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
+/posts/python/class2
   Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
@@ -157,7 +149,7 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
-/posts/python/foundation2
+/posts/python/webtest
   Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
@@ -165,7 +157,15 @@
   Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
   Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
-/posts/python/webtest
+/posts/python/foundation3
+  Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
+  Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
+  Link: </1-5dc0f478dda5f6e69181.js>; rel=preload; as=script
+  Link: </2-31b556bc2b9ce7d4a85e.js>; rel=preload; as=script
+  Link: </component---src-templates-post-template-js-bec3eb1f4cb415ad3075.js>; rel=preload; as=script
+/posts/python/foundation2
   Link: </webpack-runtime-97fd31cb9a927bc60233.js>; rel=preload; as=script
   Link: </styles-917d909a3f44ed6bc2e3.js>; rel=preload; as=script
   Link: </app-72c10f2c766d80707ed1.js>; rel=preload; as=script
