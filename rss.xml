@@ -1,8 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 23 Jul 2019 05:30:43 GMT</lastBuildDate><item><title><![CDATA[파이썬 기본 문법 정리]]></title><description><![CDATA[foundation]]></description><link>http://seung-jae.github.io//posts/python/foundation2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation2</guid><pubDate>Tue, 23 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 23 Jul 2019 06:04:49 GMT</lastBuildDate><item><title><![CDATA[파이썬 기본 문법 정리(함수)]]></title><description><![CDATA[foundation]]></description><link>http://seung-jae.github.io//posts/python/foundation3</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation3</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;함수란?&lt;br&gt;
+중복코드를 재사용하고 싶을 때 단순히 코드를 복사해서 붙여넣는 게 아닌 함수라는 형태로 코드를 작성하는 것이 좋다. 한번 잘 작성해둔 함수는 &lt;code class=&quot;language-text&quot;&gt;호출&lt;/code&gt;해서 다시 사용할 수 있기 때문에 개발 생산성을 크게 높일 수 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[파이썬 기본 문법 정리(변수)]]></title><description><![CDATA[foundation]]></description><link>http://seung-jae.github.io//posts/python/foundation2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation2</guid><pubDate>Mon, 22 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
 &lt;h4 id=&quot;1-변수란&quot;&gt;&lt;a href=&quot;#1-%EB%B3%80%EC%88%98%EB%9E%80&quot; aria-label=&quot;1 변수란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1) 변수란?&lt;/h4&gt;
 &lt;p&gt;보통 프로그래밍 분야에서 변수는 어떤 값을 저장하는 공간(기억해야 하는 값을 대신 기억하기 위한 이름표)을 의미하며, 파이썬에서 사용하는 변수는 객체를 가리키는 것이라고도 말할 수 있다.(객체란 자료형(int, string, list 등)과 같은 것을 의미한다.)&lt;br&gt;
-어떠한 데이터를 메모리상에 위치하는 주소를 이용해서 변수라는 곳에 저장해둔 후 변수에 저장된 메모리상의 주소에 가서 실제 값을 읽어서 사용한다.&lt;code class=&quot;language-text&quot;&gt;(저장 및 호출)&lt;/code&gt; 또한, 변수에 저장된 값을 원하는 만큼 곱하거나 반복, 혹은 값을 수정 할 수도 있다.&lt;br&gt;
-사용예시: 핸드폰 연락처 목록, 기억해두어야 할 특정 숫자(주식가격 등)&lt;/p&gt;
+i)어떠한 데이터를 메모리상의 주소를 이용해서 변수에 저장해둔 후 ii)변수에 저장된 메모리상의 주소에 가서 실제 값을 읽어서 사용한다.&lt;code class=&quot;language-text&quot;&gt;(저장 및 호출)&lt;/code&gt; 또한, 변수에 저장된 값을 원하는 만큼 곱하거나 반복, 혹은 값을 수정 할 수도 있다.&lt;br&gt;
+예를 들어, 살고 있는 집이 바로 객체이며, 실제로 존재하는 것이고, 주소자체는 집은 아니지만 다른 누군가가 집의 주소를 통해 방문할 수 있듯이 변수를 통해 실제 객체에 접근할 수 있는 것이다.
+&lt;img src=&quot;/media/02.06.png&quot; alt=&quot;이미지 예시&quot;&gt;
+동그라미(x) : 변수(집주소)&lt;br&gt;
+네모(100)  : 객체(집)&lt;br&gt;
+사용예시: 핸드폰 연락처 목록, 기억해두어야 할 특정 숫자(주식가격 등),&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a = [1, 2, 3]
 &amp;gt;&amp;gt;&amp;gt; a
 [1, 2, 3]
@@ -23,6 +29,7 @@
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;b = a&lt;/code&gt;를 실행할 경우 같은 주소를 가지고 있다.  &lt;/p&gt;
 &lt;h4 id=&quot;2-변수를-만드는-방법&quot;&gt;&lt;a href=&quot;#2-%EB%B3%80%EC%88%98%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95&quot; aria-label=&quot;2 변수를 만드는 방법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2) 변수를 만드는 방법&lt;/h4&gt;
 &lt;p&gt;먼저 선언된 변수명에 다른 값을 바인딩하게 되면 해당 변수의 값은 변경된다.  &lt;/p&gt;
+&lt;p&gt;256까지는 같은 메모리 주소가 나오지만 257부터 변수를 통해 &lt;code class=&quot;language-text&quot;&gt;id&lt;/code&gt;를 호출해보면 서로다른 객채가 생성된 것을 확인할 수 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a = 1
 &amp;gt;&amp;gt;&amp;gt; a
 1
@@ -42,10 +49,82 @@
 3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&quot;3-변수명-사용시-고려사항&quot;&gt;&lt;a href=&quot;#3-%EB%B3%80%EC%88%98%EB%AA%85-%EC%82%AC%EC%9A%A9%EC%8B%9C-%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD&quot; aria-label=&quot;3 변수명 사용시 고려사항 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3) 변수명 사용시 고려사항&lt;/h4&gt;
 &lt;p&gt;변수를 선언할 때 변수명은 잘 정해야 한다.&lt;br&gt;
-어떠한 값을 사용하기 위해서 변수에 저장했는데, 이름과 값이 매칭이 안될 경우 사용하는데 어려움이 있고, 다른 개발자가 봤을때도 해당 변수가 어떤 값을 저장해두었는지 예상할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;가시성&lt;/code&gt;에도 신경써야 한다. 영어 또는 언더스코어로 시작을 해야 하며, 숫자로 시작할 경우 아래와 같이 오류메세지가 발생한다.   &lt;/p&gt;
+어떠한 값을 사용하기 위해서 변수에 저장했는데, 이름과 값이 매칭이 안될 경우 추후 사용하는데 어려움이 있고, 다른 개발자가 봤을때도 해당 변수가 어떤 값을 저장해두었는지 예상할 수 있도록 &lt;code class=&quot;language-text&quot;&gt;가시성&lt;/code&gt;에도 신경써야 한다. 영어 또는 언더스코어로 시작을 해야 하며, 숫자로 시작할 경우 아래와 같이 오류메세지가 발생한다.   &lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; 1naver = 60
 SyntaxError: Invalid syntax&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;한글도 변수명으로 사용할 수 있지만 일반적으로 한글보단 영어와 언더스코어를 조합해서 변수명을 만드는 것이 좋다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python & Django Test]]></title><description><![CDATA[Python & Django Test]]></description><link>http://seung-jae.github.io//posts/python/test</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/test</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;한글도 변수명으로 사용할 수 있지만 일반적으로 한글보단 영어와 언더스코어를 조합해서 변수명을 만드는 것이 좋다.  &lt;/p&gt;
+&lt;p&gt;참고사이트&lt;br&gt;
+&lt;a href=&quot;https://wikidocs.net/2836&quot;&gt;파이썬변수와 객체&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[What Is Data Sturcture?]]></title><description><![CDATA[What Is Data Sturcture?]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;자료구조란 데이터에 편리하게 접근하고, 변경하기 위해서 데이터를 저장하거나 조작하는 방법이며, 데이터의 목적에 따라 자료구조를 잘 선택해야 하기 때문에 각 자료구조의 장점과 한계를 잘 아는 것이 중요하다.  &lt;/p&gt;
+&lt;h3 id=&quot;단순구조&quot;&gt;&lt;a href=&quot;#%EB%8B%A8%EC%88%9C%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;단순구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;단순구조&lt;/h3&gt;
+&lt;p&gt;프로그래밍에서 사용되는 기본 데이터 타입&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Integer&lt;/li&gt;
+&lt;li&gt;Float&lt;/li&gt;
+&lt;li&gt;String&lt;/li&gt;
+&lt;li&gt;Boolean  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;비단순-구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EB%8B%A8%EC%88%9C-%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비단순 구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비단순 구조&lt;/h3&gt;
+&lt;p&gt;단순데이터를 저장하는 구조가 아닌 여러 데이터를 목적에 맞게 효과적으로 저장하는 자료 구조.
+Array: 파이썬에서 메모리를 효율적으로 사용할 때 사용
+순차적으로 데이터를 저장함, 실제로 메모리상에서 순차적으로 저장됨&lt;/p&gt;
+&lt;p&gt;multi dimentional array =&gt;
+리스트안에 리스트로 되어 있고,
+주로 매트릭스(벡터 계산)를 구현할 때, 장기판, 바둑판, 지도 등에서 사용됨&lt;/p&gt;
+&lt;p&gt;단점
+searching
+delete: 제일 앞이나 중간에 있는 데이터를 삭제할 때(순서를 지켜줘야 하니까 뒤에 있는걸 땡겨줘야 됨)&lt;/p&gt;
+&lt;p&gt;array resizing: 주소의 연결성을 확보하기 위해 리스트를 안써도 메모리는 데이터 공간을 확보해놓기 떄문에 리스트를 새로운 메모리로 넣어야 함&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;새로운 메모리를 만들었는데, 사이즈가 꽉 차서 넣을 자리가 없다면 다른 리스트를 만들어서 넣어주어야 함 &gt; 메모리상에서 일어나는 일이기 때문에 코드만으로는 확인할 수 없음 &gt; 시스템이 느려지는 이유 등의 요소임&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;애초에 할당을 크게 하던가, 링크 리스트라는 데이터 스트럭처를 사용해야 함
+링크드 리스트 데이터 스트럭처는 리스트인데 메모리상으로 순차적으로 저장이 안되도 순서대로 저장해줄 수 있는 자료구조임(포인터 같은걸로 연결함)
+클라스를 사용해서 연결한다는 걸 저장해놓고 nextval(포인터) &gt; Node로 연결시킴
+슬랙 참고&lt;/p&gt;
+&lt;p&gt;리사이징의 문제는 없음
+한 값이 모두 클라스여서 메모리를 많이 잡아 먹음(100개면 100개의 객체를 만들어야 하니까)&lt;/p&gt;
+&lt;p&gt;기회비용 &gt; 메모리, 시간 &gt; 일반적으로 메모리 금액이 저렴해서 시간을 더 중요시 함&lt;/p&gt;
+&lt;p&gt;더블 링크드 리스트는 앞뒤로 찾을 수 있음
+서퀴드 링크드 리스트는 돌면서 찾음 &gt; 2~3개 이상&lt;/p&gt;
+&lt;p&gt;수정삭제가 빈번할 때, (리사이징 확률이 높을 때 링크드 리스트를 사용하는 것이 좋음)
+arr가 효율이 제일 좋음
+데이터 저장에 대해 변수가 많을 때 사용됨&lt;/p&gt;
+&lt;p&gt;Tuple
+요소수가 리스트보다 적고, 2개~5개 사이에서 저장할 때만 씀
+간단한 데이터를 표현하고 싶을 때 사용됨(좌표같은 것을 사용할 때 좋음)
+튜플이 있으면 클라스를 따로 안만들어도 됨 (튜플이 훨씬기능적임)
+엘레멘트가 많아지면 그 다음부터 어떤 데이터인지 확인할 수 없기 때문에 5개 이상 안씀&lt;/p&gt;
+&lt;p&gt;named Tuple
+튜플인데 각각의 요소에 네임을 줌&lt;/p&gt;
+&lt;p&gt;set
+값을 숫자로 단방향 해쉬로 만들고 해쉬가 들어갈 수 있는 공간의 수와 나눔
+ex) 1234%30 = 나머지 값이 인덱싱의 주소가 됨
+해쉬 컴플릭트
+넘버 값이 아닌 다른 값이 인덱싱을 가능하게 해줌&lt;/p&gt;
+&lt;p&gt;해쉬충돌이 남 &gt; 해쉬충돌이 덜 나게 해야 됨 &gt;동일한 버켓에 링크드 리스트를 사용해서 저장함 &gt; 충돌이 덜 나게 코딩 해야 됨&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;이퀄&lt;/strong&gt; 위에 &lt;strong&gt;해쉬&lt;/strong&gt;함수가 있고, &lt;strong&gt;해쉬&lt;/strong&gt;함수는 메모리의 주소를 보는 것 &gt; 고급&lt;/p&gt;
+&lt;p&gt;키 값을 해쉬 기반으로 저장 &gt; 키를 해쉬화 해서 해당 버켓에 키와 값을 저장 &lt;/p&gt;
+&lt;p&gt;셋이나 딕셔너리도 마찬가지
+제일 빠른건 인덱싱을 찾는것 &gt; 룩업
+세트가 룩업이 제일 빠름&lt;/p&gt;
+&lt;p&gt;리스트 = O(n)
+세트 = O(1)&lt;/p&gt;
+&lt;h4 id=&quot;선형구조&quot;&gt;&lt;a href=&quot;#%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;선형구조&lt;/h4&gt;
+&lt;p&gt;저장되는 자료의 전후관계가 1:1 (리스트, 스택, 큐 등)&lt;/p&gt;
+&lt;h4 id=&quot;비선형구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비선형구조&lt;/h4&gt;
+&lt;p&gt;데이터 항목 사이의 관계가 1:n 또는 n:m(트리, 그래프 등)&lt;/p&gt;
+&lt;p&gt;데이터를 백엔드가 관리하니까 자료구조가 중요함 =&gt; 데이터를 효율적으로 관리하는게 중요
+기초적이라고 생각하기 때문에 면접볼때 많이 물어봄&lt;/p&gt;
+&lt;p&gt;알고리즘, 데이터 스트럭쳐 거기에 맞는 알고리즘과 알맞는 데이터구조를 쓰면 됨&lt;/p&gt;
+&lt;p&gt;mocking
+실제 클래스를 호출 안해도 간단하게 mocking클라스로 간단하게 테스트 할 수 있게 하는 것&lt;/p&gt;
+&lt;p&gt;patch &gt; 덧대는 것 &gt; 일반적인 마킹이 안될 떄 덧땜 &gt; 코드상 마킹하기 힘들 때 &gt; requests를 할 때 requests를 어떻게 할 지 어렵기 때문에 패치를 사용 함&lt;/p&gt;
+&lt;p&gt;requests라는 라이브러리를 직접 못 짜서 ?&lt;/p&gt;
+&lt;p&gt;테스트를 할 파일에서 사용될 테스트의 목을 만들어서 사용함 (user.views.requests)&lt;/p&gt;
+&lt;p&gt;난 패치를 건줄 알았는데 안걸려 있을 때 &gt; 패치하려던게 이미 값이 있을 때 &gt; 경로문제, 타이밍 문제가 많음&lt;/p&gt;
+&lt;p&gt;프린트 열라게 찍어봐야 됨&lt;/p&gt;
+&lt;p&gt;리베이스 스쿼시 마스터 위에 이쁘게 &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python & Django Test]]></title><description><![CDATA[Python & Django Test]]></description><link>http://seung-jae.github.io//posts/python/test</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/test</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
 &lt;p&gt;시스템을 구현하거나 코딩을 했다면 잘 작동하는지, 원하는대로 개발되었는지 등을 알아보기 위해 테스트를 꼭 해야 한다고 한다. 하지만 한국사회는 빠르게 뭔가를 해야 된다는 고정관념이 있기 때문에 테스트를 소홀히 생각하고 있는 듯 하며, 나 역시도 테스트의 중요성을 아직까지는 크게 못 느끼고 있었다. 이번 포스팅은 테스트가 무엇인지, 어떤 방법이 있는지, 파이썬과 장고로는 어떻게 해야 하는지 등을 알아보고 제일 중요한(?)유닛테스트에 대해 자세히 포스팅해보려 한다.&lt;/p&gt;
 &lt;h3 id=&quot;테스트란&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%9E%80&quot; aria-label=&quot;테스트란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트란?&lt;/h3&gt;
 &lt;p&gt;소프트웨어 테스트는 시스템 또는 애플리케이션이 주어진 조건하에 기대되는(개발목적에 맞게) 결과를 제공하는 가를 평가하는 것이다. 주어진 조건이란 정상적인/비정상적인 입력 모두를 의미하며, 각각의 경우에 기대되는 결과를 보여야 한다. &lt;/p&gt;
@@ -116,77 +195,7 @@ SyntaxError: Invalid syntax&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;a href=&quot;http://softwaretestingfundamentals.com/integration-testing/&quot;&gt;Software Testing Fundamentals&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=hAUjItE42cY&quot;&gt;파이썬 테스트 시작하기(유튜브)&lt;/a&gt;
 &lt;a href=&quot;https://www.slideshare.net/hosunglee948/python-52222334&quot;&gt;파이썬 테스트 시작하기(PPT)&lt;/a&gt;&lt;br&gt;
-위 두 자료는 2015년 파이콘에서 이호성 개발자님께서 발표에 썻던 자료와 발표를 한 영상을 담고 있고, 기초 부분을 이해할 때 참고하기 좋은 자료인 듯 보인다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[What Is Data Sturcture?]]></title><description><![CDATA[What Is Data Sturcture?]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
-&lt;p&gt;자료구조란 데이터에 편리하게 접근하고, 변경하기 위해서 데이터를 저장하거나 조작하는 방법이며, 데이터의 목적에 따라 자료구조를 잘 선택해야 하기 때문에 각 자료구조의 장점과 한계를 잘 아는 것이 중요하다.  &lt;/p&gt;
-&lt;h3 id=&quot;단순구조&quot;&gt;&lt;a href=&quot;#%EB%8B%A8%EC%88%9C%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;단순구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;단순구조&lt;/h3&gt;
-&lt;p&gt;프로그래밍에서 사용되는 기본 데이터 타입&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Integer&lt;/li&gt;
-&lt;li&gt;Float&lt;/li&gt;
-&lt;li&gt;String&lt;/li&gt;
-&lt;li&gt;Boolean  &lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;비단순-구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EB%8B%A8%EC%88%9C-%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비단순 구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비단순 구조&lt;/h3&gt;
-&lt;p&gt;단순데이터를 저장하는 구조가 아닌 여러 데이터를 목적에 맞게 효과적으로 저장하는 자료 구조.
-Array: 파이썬에서 메모리를 효율적으로 사용할 때 사용
-순차적으로 데이터를 저장함, 실제로 메모리상에서 순차적으로 저장됨&lt;/p&gt;
-&lt;p&gt;multi dimentional array =&gt;
-리스트안에 리스트로 되어 있고,
-주로 매트릭스(벡터 계산)를 구현할 때, 장기판, 바둑판, 지도 등에서 사용됨&lt;/p&gt;
-&lt;p&gt;단점
-searching
-delete: 제일 앞이나 중간에 있는 데이터를 삭제할 때(순서를 지켜줘야 하니까 뒤에 있는걸 땡겨줘야 됨)&lt;/p&gt;
-&lt;p&gt;array resizing: 주소의 연결성을 확보하기 위해 리스트를 안써도 메모리는 데이터 공간을 확보해놓기 떄문에 리스트를 새로운 메모리로 넣어야 함&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;새로운 메모리를 만들었는데, 사이즈가 꽉 차서 넣을 자리가 없다면 다른 리스트를 만들어서 넣어주어야 함 &gt; 메모리상에서 일어나는 일이기 때문에 코드만으로는 확인할 수 없음 &gt; 시스템이 느려지는 이유 등의 요소임&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;애초에 할당을 크게 하던가, 링크 리스트라는 데이터 스트럭처를 사용해야 함
-링크드 리스트 데이터 스트럭처는 리스트인데 메모리상으로 순차적으로 저장이 안되도 순서대로 저장해줄 수 있는 자료구조임(포인터 같은걸로 연결함)
-클라스를 사용해서 연결한다는 걸 저장해놓고 nextval(포인터) &gt; Node로 연결시킴
-슬랙 참고&lt;/p&gt;
-&lt;p&gt;리사이징의 문제는 없음
-한 값이 모두 클라스여서 메모리를 많이 잡아 먹음(100개면 100개의 객체를 만들어야 하니까)&lt;/p&gt;
-&lt;p&gt;기회비용 &gt; 메모리, 시간 &gt; 일반적으로 메모리 금액이 저렴해서 시간을 더 중요시 함&lt;/p&gt;
-&lt;p&gt;더블 링크드 리스트는 앞뒤로 찾을 수 있음
-서퀴드 링크드 리스트는 돌면서 찾음 &gt; 2~3개 이상&lt;/p&gt;
-&lt;p&gt;수정삭제가 빈번할 때, (리사이징 확률이 높을 때 링크드 리스트를 사용하는 것이 좋음)
-arr가 효율이 제일 좋음
-데이터 저장에 대해 변수가 많을 때 사용됨&lt;/p&gt;
-&lt;p&gt;Tuple
-요소수가 리스트보다 적고, 2개~5개 사이에서 저장할 때만 씀
-간단한 데이터를 표현하고 싶을 때 사용됨(좌표같은 것을 사용할 때 좋음)
-튜플이 있으면 클라스를 따로 안만들어도 됨 (튜플이 훨씬기능적임)
-엘레멘트가 많아지면 그 다음부터 어떤 데이터인지 확인할 수 없기 때문에 5개 이상 안씀&lt;/p&gt;
-&lt;p&gt;named Tuple
-튜플인데 각각의 요소에 네임을 줌&lt;/p&gt;
-&lt;p&gt;set
-값을 숫자로 단방향 해쉬로 만들고 해쉬가 들어갈 수 있는 공간의 수와 나눔
-ex) 1234%30 = 나머지 값이 인덱싱의 주소가 됨
-해쉬 컴플릭트
-넘버 값이 아닌 다른 값이 인덱싱을 가능하게 해줌&lt;/p&gt;
-&lt;p&gt;해쉬충돌이 남 &gt; 해쉬충돌이 덜 나게 해야 됨 &gt;동일한 버켓에 링크드 리스트를 사용해서 저장함 &gt; 충돌이 덜 나게 코딩 해야 됨&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;이퀄&lt;/strong&gt; 위에 &lt;strong&gt;해쉬&lt;/strong&gt;함수가 있고, &lt;strong&gt;해쉬&lt;/strong&gt;함수는 메모리의 주소를 보는 것 &gt; 고급&lt;/p&gt;
-&lt;p&gt;키 값을 해쉬 기반으로 저장 &gt; 키를 해쉬화 해서 해당 버켓에 키와 값을 저장 &lt;/p&gt;
-&lt;p&gt;셋이나 딕셔너리도 마찬가지
-제일 빠른건 인덱싱을 찾는것 &gt; 룩업
-세트가 룩업이 제일 빠름&lt;/p&gt;
-&lt;p&gt;리스트 = O(n)
-세트 = O(1)&lt;/p&gt;
-&lt;h4 id=&quot;선형구조&quot;&gt;&lt;a href=&quot;#%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;선형구조&lt;/h4&gt;
-&lt;p&gt;저장되는 자료의 전후관계가 1:1 (리스트, 스택, 큐 등)&lt;/p&gt;
-&lt;h4 id=&quot;비선형구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비선형구조&lt;/h4&gt;
-&lt;p&gt;데이터 항목 사이의 관계가 1:n 또는 n:m(트리, 그래프 등)&lt;/p&gt;
-&lt;p&gt;데이터를 백엔드가 관리하니까 자료구조가 중요함 =&gt; 데이터를 효율적으로 관리하는게 중요
-기초적이라고 생각하기 때문에 면접볼때 많이 물어봄&lt;/p&gt;
-&lt;p&gt;알고리즘, 데이터 스트럭쳐 거기에 맞는 알고리즘과 알맞는 데이터구조를 쓰면 됨&lt;/p&gt;
-&lt;p&gt;mocking
-실제 클래스를 호출 안해도 간단하게 mocking클라스로 간단하게 테스트 할 수 있게 하는 것&lt;/p&gt;
-&lt;p&gt;patch &gt; 덧대는 것 &gt; 일반적인 마킹이 안될 떄 덧땜 &gt; 코드상 마킹하기 힘들 때 &gt; requests를 할 때 requests를 어떻게 할 지 어렵기 때문에 패치를 사용 함&lt;/p&gt;
-&lt;p&gt;requests라는 라이브러리를 직접 못 짜서 ?&lt;/p&gt;
-&lt;p&gt;테스트를 할 파일에서 사용될 테스트의 목을 만들어서 사용함 (user.views.requests)&lt;/p&gt;
-&lt;p&gt;난 패치를 건줄 알았는데 안걸려 있을 때 &gt; 패치하려던게 이미 값이 있을 때 &gt; 경로문제, 타이밍 문제가 많음&lt;/p&gt;
-&lt;p&gt;프린트 열라게 찍어봐야 됨&lt;/p&gt;
-&lt;p&gt;리베이스 스쿼시 마스터 위에 이쁘게 &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python & Django Test]]></title><description><![CDATA[Python & Django Test]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+위 두 자료는 2015년 파이콘에서 이호성 개발자님께서 발표에 썻던 자료와 발표를 한 영상을 담고 있고, 기초 부분을 이해할 때 참고하기 좋은 자료인 듯 보인다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python & Django Test]]></title><description><![CDATA[Python & Django Test]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
 &lt;p&gt;시스템을 구현하거나 코딩을 했다면 잘 작동하는지, 원하는대로 개발되었는지 등을 알아보기 위해 테스트를 꼭 해야 한다고 한다. 하지만 한국사회는 빠르게 뭔가를 해야 된다는 고정관념이 있기 때문에 테스트를 소홀히 생각하고 있는 듯 하며, 나 역시도 테스트의 중요성을 아직까지는 크게 못 느끼고 있었다. 이번 포스팅은 테스트가 무엇인지, 어떤 방법이 있는지, 파이썬과 장고로는 어떻게 해야 하는지 등을 알아보고 제일 중요한(?)유닛테스트에 대해 자세히 포스팅해보려 한다.&lt;/p&gt;
 &lt;h3 id=&quot;테스트란&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%9E%80&quot; aria-label=&quot;테스트란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트란?&lt;/h3&gt;
 &lt;p&gt;소프트웨어 테스트는 시스템 또는 애플리케이션이 주어진 조건하에 기대되는(개발목적에 맞게) 결과를 제공하는 가를 평가하는 것이다. 주어진 조건이란 정상적인/비정상적인 입력 모두를 의미하며, 각각의 경우에 기대되는 결과를 보여야 한다. &lt;/p&gt;
