@@ -7,3 +7,6 @@ npm-debug.log
 .gatsby-context.js
 .idea
 gatsby-starter-lumen.iml
+content/posts/.DS_Storue
+.gitignore.un~
+*.un~
