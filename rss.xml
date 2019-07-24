@@ -1,9 +1,200 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 23 Jul 2019 11:27:07 GMT</lastBuildDate><item><title><![CDATA[파이썬 기본 문법 정리(함수)]]></title><description><![CDATA[foundation]]></description><link>http://seung-jae.github.io//posts/python/foundation3</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation3</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
-&lt;p&gt;함수란?&lt;br&gt;
-중복코드를 재사용하고 싶을 때 단순히 코드를 복사해서 붙여넣는 게 아닌 함수라는 형태로 코드를 작성하는 것이 좋다. 한번 잘 작성해둔 함수는 &lt;code class=&quot;language-text&quot;&gt;호출&lt;/code&gt;해서 다시 사용할 수 있기 때문에 개발 생산성을 크게 높일 수 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[파이썬 기본 문법 정리(변수)]]></title><description><![CDATA[foundation]]></description><link>http://seung-jae.github.io//posts/python/foundation2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation2</guid><pubDate>Mon, 22 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Wed, 24 Jul 2019 08:22:49 GMT</lastBuildDate><item><title><![CDATA[파이썬 기본 문법 정리(함수)]]></title><description><![CDATA[foundation/Function]]></description><link>http://seung-jae.github.io//posts/python/foundation3</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation3</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;위코드에서 2개월 간 코딩을 배우면서 함수와 변수를 사용하기만 했지 정확히 왜 사용하고, 왜 함수가 만들어졌고, 언제 사용해야 할 지 등은 모르고 되는데로 사용한 것 같다. 정확히 모르기 때문에 코딩이 더 안된 탓도 있는거 같아서 함수에 대해 자세히 알아보고자 한다.&lt;/p&gt;
+&lt;h3 id=&quot;들어가기-전순차적-프로그래밍-비구조적-프로그래밍&quot;&gt;&lt;a href=&quot;#%EB%93%A4%EC%96%B4%EA%B0%80%EA%B8%B0-%EC%A0%84%EC%88%9C%EC%B0%A8%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B9%84%EA%B5%AC%EC%A1%B0%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot; aria-label=&quot;들어가기 전순차적 프로그래밍 비구조적 프로그래밍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;들어가기 전(순차적 프로그래밍, 비구조적 프로그래밍)&lt;/h3&gt;
+&lt;p&gt;함수에 대해서 알아보기 전에 함수와 클래스가 왜 생긴건지부터 알아보자.
+(간단하게 이런게 있다고만 알면 된다고 한다.)   &lt;/p&gt;
+&lt;h4 id=&quot;1-순차적비구조적-프로그래밍&quot;&gt;&lt;a href=&quot;#1-%EC%88%9C%EC%B0%A8%EC%A0%81%EB%B9%84%EA%B5%AC%EC%A1%B0%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot; aria-label=&quot;1 순차적비구조적 프로그래밍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1) 순차적(비구조적) 프로그래밍&lt;/h4&gt;
+&lt;h4 id=&quot;2-절차적구조적-프로그래밍&quot;&gt;&lt;a href=&quot;#2-%EC%A0%88%EC%B0%A8%EC%A0%81%EA%B5%AC%EC%A1%B0%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot; aria-label=&quot;2 절차적구조적 프로그래밍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2) 절차적(구조적) 프로그래밍&lt;/h4&gt;
+&lt;h4 id=&quot;3-객체지향적-프로그래밍&quot;&gt;&lt;a href=&quot;#3-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot; aria-label=&quot;3 객체지향적 프로그래밍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3) 객체지향적 프로그래밍&lt;/h4&gt;
+&lt;h4 id=&quot;1순차적-프로그래밍&quot;&gt;&lt;a href=&quot;#1%EC%88%9C%EC%B0%A8%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot; aria-label=&quot;1순차적 프로그래밍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1)순차적 프로그래밍&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;말 그대로 순차적으로 흘러가는 프로그래밍 구조를 의미한다.  &lt;/li&gt;
+&lt;li&gt;여기서 말하는 순차적이란 순차를 중점으로 보는 프로그램라는 것을 의미한다.(즉 코드의 흐름, 순서에 기바한 프로그래밍이라는 것임)&lt;/li&gt;
+&lt;li&gt;가장 초기에 등장한 코딩 패러다임이다.(모든 프로그램들이 순서대로 읽기 때문에)  &lt;/li&gt;
+&lt;li&gt;구조라는 개념이 없기 때문에 goto문을 사용해서 코드를 짜게 된다. 하지만 규모가 커질수록 코딩에 집중하기 보단 서로간의 관계와 흐름만 신경쓰다가 시간만 버리고 있었다고 하며, 따라서 코드의 중복을 최대한 피하기 위해서 코드를 단위화할 방법을 모색하게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://namu.wiki/w/GOTO&quot;&gt;goto문&lt;/a&gt; : 특정 줄 번호나 레이블로 건너뛰거나 돌아갈때 쓰는 명령어&lt;br&gt;
+&lt;a href=&quot;https://dodo000.tistory.com/2&quot;&gt;프로그래밍 패러다임&lt;/a&gt;
+&lt;a href=&quot;https://kamang-it.tistory.com/entry/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84%EC%88%9C%EC%B0%A8%EC%A0%81%EB%B9%84%EA%B5%AC%EC%A1%B0%EC%A0%81%EC%A0%88%EC%B0%A8%EC%A0%81%EA%B5%AC%EC%A1%B0%EC%A0%81%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2-절차적-프로그래밍-구조적-프로그래밍&quot;&gt;&lt;a href=&quot;#2-%EC%A0%88%EC%B0%A8%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EA%B5%AC%EC%A1%B0%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot; aria-label=&quot;2 절차적 프로그래밍 구조적 프로그래밍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2) 절차적 프로그래밍, 구조적 프로그래밍&lt;/h4&gt;
+&lt;p&gt;절차적 프로그래밍을 절차지향 프로그래밍이라고 하는데, 절차지향프로그래밍이란 존재하지 않는다.
+절차란 함수를 의미한다. 따라서 반복될 가능성이 있는 모듈을 재사용 가능한 단위(함수)로 나눈 프로그래밍이라고 할 수 있다.  &lt;/p&gt;
+&lt;p&gt;절차적 프로그래밍이 발전된게 구조적 프로그래밍이다. (절차적 프로그매밍이 함수를 기준으로 나뉜다면, 구조적 프로그래밍은 모듈을 기준으로 나뉘기 떄문에 동의어는 아니다. 하지만, 모듈은 물리적인 소스파일을 이야기하는 것이기 떄문에 완전히 다르다고 하긴 애매모호하다.)&lt;br&gt;
+프로시저라는 것은 추상적인 단위기 때문에 절차적(구조적) 프로그래밍의 문제였다.(물리적인 요소(변수나 상수등의 값들을 저장하기 위한 메모리)를 관리하는 방법에 대해서 깊게 논하지 않기에 그것까지 관리하는데는 문제가 생기기 마련이다.)  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;프로시저: 메모리에 저장되는 것을 관리하는 논리적 단위   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;예를 들자면,&lt;br&gt;
+도서관리 프로그램을 작성한다고 하면 책이라는 자료형이 필요하다.
+그리고 그 책에 대한 함수역시 필요할 것이다. 구조적 프로그래밍에서는 이 둘을 따로 생각할 수 밖에 없다.&lt;br&gt;
+즉 책 자료형은 책 자료형이고 그것을 사용하는 함수는 함수대로 따로 있는것이다.&lt;br&gt;
+이를 소스파일에 묶어 두더라도 사용자 입장에서 코드가 길어진다면 그것을 알기는 굉장히 힘들다.  &lt;/p&gt;
+&lt;p&gt;즉 책에 대한 자료형과 책에 대한 함수가 물리적으론(기록되는 곳)같이 있을 수(모듈) 있지만 논리적으로는(개념)&lt;br&gt;
+함께 할 수 없는 구조이기 때문이다. 이를 묶기 위한 새로운 패러다임이 필요했다.&lt;/p&gt;
+&lt;h4 id=&quot;3-객체지향적-프로그래밍object-oriented-programming&quot;&gt;&lt;a href=&quot;#3-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8Dobject-oriented-programming&quot; aria-label=&quot;3 객체지향적 프로그래밍object oriented programming permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;3) 객체지향적 프로그래밍(Object-Oriented Programming)&lt;/h4&gt;
+&lt;p&gt;절차적(구조적) 프로그래밍의 문제점을 해결하는 것은 생각보다 간단했었고, 특정 개념과 자료형을 함께 묶어서 관리하자 해서 탄생된 것이 객체지향 프로그래밍이다.&lt;/p&gt;
+&lt;p&gt;여기서 중요한 점은 모든 객체는 그 내부에 자료형(Field)와 함수(Method)가 존재한다.
+이렇게 객체 지향 프로그램은 가능한 모든 물리적, 논리적 요소들을 객체로 만드려고 한다.&lt;br&gt;
+일단 객체라는 한 개체로 완성되면 그 객체는 다른 객체로 부터 높은 수준의 독립성을 완성했다고 할 수 있다.&lt;br&gt;
+이렇게 하면 코딩할때 극 초반에만 조금 불편해진다.&lt;br&gt;
+그러나 시간이 지날수록 중복코딩이 굉장히 줄게되며 객체와 객체간에 독립성이 확립되므로 유지보수에 도움이된다.  &lt;/p&gt;
+&lt;h5 id=&quot;반응형-함수형-프로그래밍이-부상하면서-객체지향-프로그래밍인-파이썬도-저무는-날이-언젠가-올것이다&quot;&gt;&lt;a href=&quot;#%EB%B0%98%EC%9D%91%ED%98%95-%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4-%EB%B6%80%EC%83%81%ED%95%98%EB%A9%B4%EC%84%9C-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B8-%ED%8C%8C%EC%9D%B4%EC%8D%AC%EB%8F%84-%EC%A0%80%EB%AC%B4%EB%8A%94-%EB%82%A0%EC%9D%B4-%EC%96%B8%EC%A0%A0%EA%B0%80-%EC%98%AC%EA%B2%83%EC%9D%B4%EB%8B%A4&quot; aria-label=&quot;반응형 함수형 프로그래밍이 부상하면서 객체지향 프로그래밍인 파이썬도 저무는 날이 언젠가 올것이다 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;반응형, 함수형 프로그래밍이 부상하면서 객체지향 프로그래밍인 파이썬도 저무는 날이 언젠가 올것이다.&lt;/h5&gt;
+&lt;h2 id=&quot;요약&quot;&gt;&lt;a href=&quot;#%EC%9A%94%EC%95%BD&quot; aria-label=&quot;요약 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;요약&lt;/h2&gt;
+&lt;p&gt;정확히 객체지향적 프로그래밍이 어떤거고, 원래 이렇게 간단하게 할 수 있는 건 줄 알았는데, 함수와 클래스가 생기면서 편해졌다는 걸 느꼈고, 불편한 것들을 해소하고 편한 방식을 찾기 위해 연구하는 사람들을 응원한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;그럼 이제 본론으로 들어와서 파이썬에서 함수를 어떻게 사용하는지, 함수가 무엇인지를 알아보자.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;함수funtion&quot;&gt;&lt;a href=&quot;#%ED%95%A8%EC%88%98funtion&quot; aria-label=&quot;함수funtion permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;함수(Funtion)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;쉽게 설명하면, 어떤 재료를 넣어 새로운 값을 만드는 틀이라고 생각하면 쉬워진다.&lt;/li&gt;
+&lt;li&gt;본래 구조적 프로그래밍은 &lt;/li&gt;
+&lt;li&gt;어떤 입력에 대한 작업의 결과를 출력해주는 것&lt;/li&gt;
+&lt;li&gt;함수(function)은 일정한 작업을 수행하는 코드블럭으로 반복적으로 계속 사용되는 코드들을 함수로 정의하여 사용하게 된다.&lt;/li&gt;
+&lt;li&gt;미리 구현된 함수들을 라이브러리 함수라고 하고, 본인이 만든 함수를 사용자 함수라고 부른다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;함수 자체로는 프로그래밍의 연산이나 논리에 직접적으로 관여하진 않으나 방대한 코드를 줄여주고, 유지보수를 쉽게하고, 버그가 발생할 여지를 줄여주는 것이라고 할 수 있다. 또한, 함수를 사용하지 않아도 개발을 할 수 있으나 함수를 사용하는 이유는 규모가 큰 소프트웨어를 만든다는 것이 현실적으로 어렵다.  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;결과물을 확인하기 위해 자주 사용하고 있는 print()도 함수이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;함수를-사용하는-이유와-주의사항&quot;&gt;&lt;a href=&quot;#%ED%95%A8%EC%88%98%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0%EC%99%80-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD&quot; aria-label=&quot;함수를 사용하는 이유와 주의사항 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;함수를 사용하는 이유와 주의사항&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사용하는 이유     &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;중복된 여러개의 코드를 함수에 담아 사용하게 될 경우 가독성이 좋아진다.(코드가 깔끔해지고, 어디에서 어떤 기능을 사용하는지 알아보기 쉽다.)  &lt;/li&gt;
+&lt;li&gt;프로그램에 문제가 발생하거나 기능을 수정해야 할 경우 손쉽게 유지보수 할 수 있다.&lt;/li&gt;
+&lt;li&gt;코드를 작성 후 추후에 검토를 하거나 다른사람이 봤을 때 분석하기 쉬워진다.&lt;/li&gt;
+&lt;li&gt;기존에 작성된 함수만 복사하면 같은 기능을 하는 함수만 복사해 와서 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주의사항&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;별도의 규칙은 없으나 하나의 기능을 하나의 함수로 만드는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;같은 이름으로 함수를 정의 할 경우 마지막에 정의된 함수가 실행된다. 하지만 중복, 일반화가 가능하며, 디스패치 함수를 작성하여 관련된 함수의 집합에 디스패치 하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;중복된 함수를 제거해서 가독성을 높이고, 유지보수하기 쉬워지고, 같은기능을 가진 함수를 다른곳에서도 사용할 수 있다. 이제 함수를 어떻게 사용하면 될지 알아보자. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;함수의-사용법&quot;&gt;&lt;a href=&quot;#%ED%95%A8%EC%88%98%EC%9D%98-%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;함수의 사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;함수의 사용법&lt;/h3&gt;
+&lt;h4 id=&quot;기본적인-사용법&quot;&gt;&lt;a href=&quot;#%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;기본적인 사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;기본적인 사용법&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;아래와 같이 &lt;code class=&quot;language-text&quot;&gt;def&lt;/code&gt;로 정의하고 알맞은 함수명을 작성하여 사용할 수 있으며, 파이썬은 띄어쓰기에 굉장히 민감하므로 문장 앞에는 2칸, 혹은 4칸의 공백을 두어 사용해야 한다.(보통 Tap으로 많이 사용 됨)&lt;/li&gt;
+&lt;li&gt;함수 이름 뒤 괄호 안의 매개변수는 호출된 인자를 받기 위한 것이며, &lt;code class=&quot;language-text&quot;&gt;값이 없는 변수&lt;/code&gt;이다. 이렇게 정의한 후 if, while, for문 등으로 함수에서 수행할 문장을 입력한다.(입력되는 값은 함수의 매개변수가 몇개인지에 따라 나뉘는게 보통이며(먼저 정의된 매개변수가 없을 수도 있다.)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;매개변수와 인수라는 단어를 혼용해서 사용하거나 헷갈릴 수 있으니 잘 알고 사용해야 한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;매개변수는 함수에 입력으로 전달된 값&lt;br&gt;
+인수는 함수를 호출할 떄 전달하는 입력 값&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;함수의 기본 틀  &lt;/li&gt;
+&lt;li&gt;덧셈을 위한 예시  &lt;/li&gt;
+&lt;li&gt;매개변수에 직접 값을 입력한 함수 정의  &lt;/li&gt;
+&lt;li&gt;매개변수가 몇개일지 모를 경우 사용하는 매개변수명(*args)  &lt;/li&gt;
+&lt;li&gt;매개변수값을 Dictionary 형태로 리턴해주는 매개변수(**kwargs)  &lt;/li&gt;
+&lt;li&gt;매개변수의 값을 미리 설정  &lt;/li&gt;
+&lt;li&gt;함수의 외부와 내부에 같은명의 변수가 있을 경우  &lt;/li&gt;
+&lt;li&gt;함수 외부에서 선언된 변수의 값 변경(return, global)&lt;/li&gt;
+&lt;li&gt;lambda  &lt;/li&gt;
+&lt;li&gt;재귀함수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#함수의 기본적인 틀
+&amp;gt;&amp;gt;&amp;gt; def 함수명(매개변수): #parameter
+...  &amp;lt;문장1&amp;gt;
+...  &amp;lt;문장2&amp;gt;
+...  ...
+print(함수명(인수)) # argument&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;매개변수(입력값)가 없는 함수는 아래와 같이 작성되며, 입력된 매개변수가 없어서 별도의 값을 받진 않지만 호출하게 될 경우 &lt;code class=&quot;language-text&quot;&gt;hello world&lt;/code&gt;를 리턴해준다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;호출했을 떄 return을 통해 결과값을 돌려받거나(오직 return으로만 돌려받을 수 있음) print와 같이 바로 어떤 문장이나 값을 출력해 줄 수도 있다.(print()문은 아래의 &amp;#x3C;문장1&gt;과 같이 수행할 문장에 해당하는 부분이여서 별도의 결과값이 존재하지 않는다고 한다.) &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; def test():
+...  print(&amp;quot;hello world&amp;quot;)
+...
+&amp;gt;&amp;gt;&amp;gt; a = test()
+&amp;gt;&amp;gt;&amp;gt; print(a)
+hello world&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;매개변수에 직접 값을 지정하여 호출을 할 수 있다. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; def add(a, b):
+...     return a+b
+...
+&amp;gt;&amp;gt;&amp;gt; result = add(a=3, b=7)  # a에 3, b에 7을 전달
+&amp;gt;&amp;gt;&amp;gt; print(result)
+10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;몇개의 매개변수를 받을 지 모를 경우 &lt;code class=&quot;language-text&quot;&gt;*args&lt;/code&gt;, 딕셔너리 자료형으로 결괏값을 저장하려면 &lt;code class=&quot;language-text&quot;&gt;**kwargs&lt;/code&gt;를 사용한다.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; def add_mul(choice, *args): 
+...     if choice == &amp;quot;add&amp;quot;: 
+...         result = 0 
+...         for i in args: 
+...             result = result + i 
+...     elif choice == &amp;quot;mul&amp;quot;: 
+...         result = 1 
+...         for i in args: 
+...             result = result * i 
+...     return result 
+... 
+&amp;gt;&amp;gt;&amp;gt; result = add_mul(&amp;#39;add&amp;#39;, 1,2,3,4,5)
+&amp;gt;&amp;gt;&amp;gt; print(result)
+15
+&amp;gt;&amp;gt;&amp;gt; result = add_mul(&amp;#39;mul&amp;#39;, 1,2,3,4,5)
+&amp;gt;&amp;gt;&amp;gt; print(result)
+120&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위 예제를 보면, 매개변수 &lt;code class=&quot;language-text&quot;&gt;choice&lt;/code&gt;에 &lt;code class=&quot;language-text&quot;&gt;add&lt;/code&gt;를 받으면 덧셈이 되고, &lt;code class=&quot;language-text&quot;&gt;mul&lt;/code&gt;을 받으면 곱셈을 한 값을 리턴해준다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; def add_and_mul(a,b):
+...   return a+b, a*b
+&amp;gt;&amp;gt;&amp;gt; add_and_mul(3,4)
+(7, 12)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;매개변수에 초깃값을 미리 설정해둔 함수를 만들 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;lambda&quot;&gt;&lt;a href=&quot;#lambda&quot; aria-label=&quot;lambda permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;lambda&lt;/h4&gt;
+&lt;p&gt;lambda는 함수와 같은 역할을 하며, 간단한 함수를 작성하거나 함수를 사용할 수 없을 때 사용된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;lambda 매개변수1, 매개변수2, ... : 매개변수를 이용한 표현식
+
+&amp;gt;&amp;gt;&amp;gt; add = lambda a, b: a+b
+&amp;gt;&amp;gt;&amp;gt; result = add(3, 4)
+&amp;gt;&amp;gt;&amp;gt; print(result)
+7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&quot;재귀함수&quot;&gt;&lt;a href=&quot;#%EC%9E%AC%EA%B7%80%ED%95%A8%EC%88%98&quot; aria-label=&quot;재귀함수 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;재귀함수&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;함수 내부에서 함수 자신을 호출하는 경우를 흔히 볼수 있으며 이러한 유형은 재귀함수 호출이라고 한다.&lt;/li&gt;
+&lt;li&gt;재귀함수에서 알아야 할 것은 언제까지 반복할 건지와 언제 멈출 것인지를 잘 설정해두지 않으면 무한루프에 빠질 수 있다.&lt;/li&gt;
+&lt;li&gt;팩토리얼이나 일정한 규칙을 가진 함수를 통해 원하는 결과값을 return해야 할 때 많이 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;내가 지금까지 사용한 함수들은 극소수에 불과하고, 함수의 기능들을 자유자재로 사용하기 위해 &lt;u&gt;&lt;strong&gt;제대로&lt;/strong&gt;&lt;/u&gt;와 &lt;u&gt;&lt;strong&gt;꾸준히&lt;/strong&gt;&lt;/u&gt; 여러가지 코드를 짜봐야 할 거 같다. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://jolggu.tistory.com/63&quot;&gt;성실, 꾸준함&lt;/a&gt;   &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;참고사이트&lt;br&gt;
+&lt;a href=&quot;http://tcpschool.com/cpp/cpp_function_basic&quot;&gt;tcpschool&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://wikidocs.net/24&quot;&gt;wikidocs&lt;/a&gt;
+&lt;a href=&quot;https://kamang-it.tistory.com/entry/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84%EC%88%9C%EC%B0%A8%EC%A0%81%EB%B9%84%EA%B5%AC%EC%A1%B0%EC%A0%81%EC%A0%88%EC%B0%A8%EC%A0%81%EA%B5%AC%EC%A1%B0%EC%A0%81%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&quot;&gt;순차적, 절차적, 객체지향적 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[파이썬 기본 문법 정리(변수)]]></title><description><![CDATA[foundation]]></description><link>http://seung-jae.github.io//posts/python/foundation2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/foundation2</guid><pubDate>Mon, 22 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
 &lt;h4 id=&quot;1-변수란&quot;&gt;&lt;a href=&quot;#1-%EB%B3%80%EC%88%98%EB%9E%80&quot; aria-label=&quot;1 변수란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1) 변수란?&lt;/h4&gt;
 &lt;p&gt;보통 프로그래밍 분야에서 변수는 어떤 값을 저장하는 공간(기억해야 하는 값을 대신 기억하기 위한 이름표)을 의미하며, 파이썬에서 사용하는 변수는 객체를 가리키는 것이라고도 말할 수 있다.(객체란 자료형(int, string, list 등)과 같은 것을 의미한다.)&lt;br&gt;
-i)어떠한 데이터를 메모리상의 주소를 이용해서 변수에 저장해둔 후 ii)변수에 저장된 메모리상의 주소에 가서 실제 값을 읽어서 사용한다.&lt;code class=&quot;language-text&quot;&gt;(저장 및 호출)&lt;/code&gt; 또한, 변수에 저장된 값을 원하는 만큼 곱하거나 반복, 혹은 값을 수정 할 수도 있다.&lt;br&gt;
+위에서 말한대로 각각의 변수는 객체에 따라서 자료형이 결정되며, 결정된 자료형에 따라 사용할 수 있는 메소드가 다르기 때문에 타입에 맞는 메소드를 사용해야 한다.&lt;br&gt;
+변수는 전역변수와 지역변수 등 변수가 선언된 위치에 따라서 사용범위가 달라지니 어디에서 쓰이는 변수인지 생각한 후 필요한 곳에 선언해서 사용하자.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;gt;&amp;gt;&amp;gt; a = 100
+&amp;gt;&amp;gt;&amp;gt; type(a)
+&amp;lt;class &amp;#39;int&amp;#39;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; b = &amp;quot;Hello World&amp;quot;
+&amp;gt;&amp;gt;&amp;gt; type(b)
+&amp;lt;class &amp;#39;str&amp;#39;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;i)어떠한 데이터를 메모리상의 주소를 이용해서 변수에 저장해둔 후 ii)변수에 저장된 메모리상의 주소에 가서 실제 값을 읽어서 사용한다.&lt;code class=&quot;language-text&quot;&gt;(저장 및 호출)&lt;/code&gt; 또한, 변수에 저장된 값을 원하는 만큼 곱하거나 반복, 혹은 값을 수정 할 수도 있다.&lt;br&gt;
 예를 들어, 살고 있는 집이 바로 객체이며, 실제로 존재하는 것이고, 주소자체는 집은 아니지만 다른 누군가가 집의 주소를 통해 방문할 수 있듯이 변수를 통해 실제 객체에 접근할 수 있는 것이다.
 &lt;img src=&quot;/media/02.06.png&quot; alt=&quot;이미지 예시&quot;&gt;
 동그라미(x) : 변수(집주소)&lt;br&gt;
@@ -34,7 +225,16 @@ i)어떠한 데이터를 메모리상의 주소를 이용해서 변수에 저장
 &lt;ul&gt;
 &lt;li&gt;객체가 어떤 의미를 가지는지와 어떤 목적으로 생성된 객체인지 코드에서 알기 쉽게 할 수 있다.&lt;/li&gt;
 &lt;li&gt;특정값을 변수에 저장해두기 때문에 재사용성이 용이하다.&lt;/li&gt;
-&lt;li&gt;파이썬에서 모든것들은 객체이며, 객체의 속성값들을 포함한 정보가 생성된다는 이야기다. 생성된 객체는 빠르게 연산되어야 하기 때문에 메모리에 저장되며, 메모리는 물리적 공간의 제한이 있기 때문에 객체가 사용되지 않으면 파이썬 내부의 GC(garbage collector)가 자동으로 중간중간 제거하는데, 변수에 객체를 참조하고 있다면 지우지 않고 남아있는다.&lt;/li&gt;
+&lt;li&gt;파이썬에서 모든것들은 객체이며, 객체의 속성값들을 포함한 정보가 생성된다는 이야기다. 생성된 객체는 빠르게 연산되어야 하기 때문에 메모리에 저장되며, 메모리는 물리적 공간의 제한이 있기 때문에 객체가 사용되지 않으면 파이썬 내부의 GC(garbage collector)가 자동으로 중간중간 제거하는데, 변수에 객체를 참조하고 있다면 지우지 않고 남아있는다.  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;변수를 사용해야 할 경우&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;반복하여 값을 계속 호출, 출력해야 할 경우(ex: for loop)&lt;/li&gt;
+&lt;li&gt;선언된 여러 변수들의 값을 연산하거나 중간 값을 저장해야 할 때&lt;/li&gt;
+&lt;li&gt;함수나 클래스를 이용해 인풋된 값을 정해진 틀에 맞게 수정하여 원하는 아웃풋을 얻고 싶을 때&lt;/li&gt;
+&lt;li&gt;사용자로부터 입력을 받은 값을 저장할 때, 받은 값의 type을 원하는대로 변환해야 할 때(int =&gt; str 등)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -136,77 +336,7 @@ SyntaxError: Invalid syntax&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;a href=&quot;http://softwaretestingfundamentals.com/integration-testing/&quot;&gt;Software Testing Fundamentals&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=hAUjItE42cY&quot;&gt;파이썬 테스트 시작하기(유튜브)&lt;/a&gt;
 &lt;a href=&quot;https://www.slideshare.net/hosunglee948/python-52222334&quot;&gt;파이썬 테스트 시작하기(PPT)&lt;/a&gt;&lt;br&gt;
-위 두 자료는 2015년 파이콘에서 이호성 개발자님께서 발표에 썻던 자료와 발표를 한 영상을 담고 있고, 기초 부분을 이해할 때 참고하기 좋은 자료인 듯 보인다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[What Is Data Sturcture?]]></title><description><![CDATA[What Is Data Sturcture?]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
-&lt;p&gt;자료구조란 데이터에 편리하게 접근하고, 변경하기 위해서 데이터를 저장하거나 조작하는 방법이며, 데이터의 목적에 따라 자료구조를 잘 선택해야 하기 때문에 각 자료구조의 장점과 한계를 잘 아는 것이 중요하다.  &lt;/p&gt;
-&lt;h3 id=&quot;단순구조&quot;&gt;&lt;a href=&quot;#%EB%8B%A8%EC%88%9C%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;단순구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;단순구조&lt;/h3&gt;
-&lt;p&gt;프로그래밍에서 사용되는 기본 데이터 타입&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Integer&lt;/li&gt;
-&lt;li&gt;Float&lt;/li&gt;
-&lt;li&gt;String&lt;/li&gt;
-&lt;li&gt;Boolean  &lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;비단순-구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EB%8B%A8%EC%88%9C-%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비단순 구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비단순 구조&lt;/h3&gt;
-&lt;p&gt;단순데이터를 저장하는 구조가 아닌 여러 데이터를 목적에 맞게 효과적으로 저장하는 자료 구조.
-Array: 파이썬에서 메모리를 효율적으로 사용할 때 사용
-순차적으로 데이터를 저장함, 실제로 메모리상에서 순차적으로 저장됨&lt;/p&gt;
-&lt;p&gt;multi dimentional array =&gt;
-리스트안에 리스트로 되어 있고,
-주로 매트릭스(벡터 계산)를 구현할 때, 장기판, 바둑판, 지도 등에서 사용됨&lt;/p&gt;
-&lt;p&gt;단점
-searching
-delete: 제일 앞이나 중간에 있는 데이터를 삭제할 때(순서를 지켜줘야 하니까 뒤에 있는걸 땡겨줘야 됨)&lt;/p&gt;
-&lt;p&gt;array resizing: 주소의 연결성을 확보하기 위해 리스트를 안써도 메모리는 데이터 공간을 확보해놓기 떄문에 리스트를 새로운 메모리로 넣어야 함&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;새로운 메모리를 만들었는데, 사이즈가 꽉 차서 넣을 자리가 없다면 다른 리스트를 만들어서 넣어주어야 함 &gt; 메모리상에서 일어나는 일이기 때문에 코드만으로는 확인할 수 없음 &gt; 시스템이 느려지는 이유 등의 요소임&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;애초에 할당을 크게 하던가, 링크 리스트라는 데이터 스트럭처를 사용해야 함
-링크드 리스트 데이터 스트럭처는 리스트인데 메모리상으로 순차적으로 저장이 안되도 순서대로 저장해줄 수 있는 자료구조임(포인터 같은걸로 연결함)
-클라스를 사용해서 연결한다는 걸 저장해놓고 nextval(포인터) &gt; Node로 연결시킴
-슬랙 참고&lt;/p&gt;
-&lt;p&gt;리사이징의 문제는 없음
-한 값이 모두 클라스여서 메모리를 많이 잡아 먹음(100개면 100개의 객체를 만들어야 하니까)&lt;/p&gt;
-&lt;p&gt;기회비용 &gt; 메모리, 시간 &gt; 일반적으로 메모리 금액이 저렴해서 시간을 더 중요시 함&lt;/p&gt;
-&lt;p&gt;더블 링크드 리스트는 앞뒤로 찾을 수 있음
-서퀴드 링크드 리스트는 돌면서 찾음 &gt; 2~3개 이상&lt;/p&gt;
-&lt;p&gt;수정삭제가 빈번할 때, (리사이징 확률이 높을 때 링크드 리스트를 사용하는 것이 좋음)
-arr가 효율이 제일 좋음
-데이터 저장에 대해 변수가 많을 때 사용됨&lt;/p&gt;
-&lt;p&gt;Tuple
-요소수가 리스트보다 적고, 2개~5개 사이에서 저장할 때만 씀
-간단한 데이터를 표현하고 싶을 때 사용됨(좌표같은 것을 사용할 때 좋음)
-튜플이 있으면 클라스를 따로 안만들어도 됨 (튜플이 훨씬기능적임)
-엘레멘트가 많아지면 그 다음부터 어떤 데이터인지 확인할 수 없기 때문에 5개 이상 안씀&lt;/p&gt;
-&lt;p&gt;named Tuple
-튜플인데 각각의 요소에 네임을 줌&lt;/p&gt;
-&lt;p&gt;set
-값을 숫자로 단방향 해쉬로 만들고 해쉬가 들어갈 수 있는 공간의 수와 나눔
-ex) 1234%30 = 나머지 값이 인덱싱의 주소가 됨
-해쉬 컴플릭트
-넘버 값이 아닌 다른 값이 인덱싱을 가능하게 해줌&lt;/p&gt;
-&lt;p&gt;해쉬충돌이 남 &gt; 해쉬충돌이 덜 나게 해야 됨 &gt;동일한 버켓에 링크드 리스트를 사용해서 저장함 &gt; 충돌이 덜 나게 코딩 해야 됨&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;이퀄&lt;/strong&gt; 위에 &lt;strong&gt;해쉬&lt;/strong&gt;함수가 있고, &lt;strong&gt;해쉬&lt;/strong&gt;함수는 메모리의 주소를 보는 것 &gt; 고급&lt;/p&gt;
-&lt;p&gt;키 값을 해쉬 기반으로 저장 &gt; 키를 해쉬화 해서 해당 버켓에 키와 값을 저장 &lt;/p&gt;
-&lt;p&gt;셋이나 딕셔너리도 마찬가지
-제일 빠른건 인덱싱을 찾는것 &gt; 룩업
-세트가 룩업이 제일 빠름&lt;/p&gt;
-&lt;p&gt;리스트 = O(n)
-세트 = O(1)&lt;/p&gt;
-&lt;h4 id=&quot;선형구조&quot;&gt;&lt;a href=&quot;#%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;선형구조&lt;/h4&gt;
-&lt;p&gt;저장되는 자료의 전후관계가 1:1 (리스트, 스택, 큐 등)&lt;/p&gt;
-&lt;h4 id=&quot;비선형구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비선형구조&lt;/h4&gt;
-&lt;p&gt;데이터 항목 사이의 관계가 1:n 또는 n:m(트리, 그래프 등)&lt;/p&gt;
-&lt;p&gt;데이터를 백엔드가 관리하니까 자료구조가 중요함 =&gt; 데이터를 효율적으로 관리하는게 중요
-기초적이라고 생각하기 때문에 면접볼때 많이 물어봄&lt;/p&gt;
-&lt;p&gt;알고리즘, 데이터 스트럭쳐 거기에 맞는 알고리즘과 알맞는 데이터구조를 쓰면 됨&lt;/p&gt;
-&lt;p&gt;mocking
-실제 클래스를 호출 안해도 간단하게 mocking클라스로 간단하게 테스트 할 수 있게 하는 것&lt;/p&gt;
-&lt;p&gt;patch &gt; 덧대는 것 &gt; 일반적인 마킹이 안될 떄 덧땜 &gt; 코드상 마킹하기 힘들 때 &gt; requests를 할 때 requests를 어떻게 할 지 어렵기 때문에 패치를 사용 함&lt;/p&gt;
-&lt;p&gt;requests라는 라이브러리를 직접 못 짜서 ?&lt;/p&gt;
-&lt;p&gt;테스트를 할 파일에서 사용될 테스트의 목을 만들어서 사용함 (user.views.requests)&lt;/p&gt;
-&lt;p&gt;난 패치를 건줄 알았는데 안걸려 있을 때 &gt; 패치하려던게 이미 값이 있을 때 &gt; 경로문제, 타이밍 문제가 많음&lt;/p&gt;
-&lt;p&gt;프린트 열라게 찍어봐야 됨&lt;/p&gt;
-&lt;p&gt;리베이스 스쿼시 마스터 위에 이쁘게 &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python & Django Test]]></title><description><![CDATA[Python & Django Test]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+위 두 자료는 2015년 파이콘에서 이호성 개발자님께서 발표에 썻던 자료와 발표를 한 영상을 담고 있고, 기초 부분을 이해할 때 참고하기 좋은 자료인 듯 보인다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python & Django Test]]></title><description><![CDATA[Python & Django Test]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
 &lt;p&gt;시스템을 구현하거나 코딩을 했다면 잘 작동하는지, 원하는대로 개발되었는지 등을 알아보기 위해 테스트를 꼭 해야 한다고 한다. 하지만 한국사회는 빠르게 뭔가를 해야 된다는 고정관념이 있기 때문에 테스트를 소홀히 생각하고 있는 듯 하며, 나 역시도 테스트의 중요성을 아직까지는 크게 못 느끼고 있었다. 이번 포스팅은 테스트가 무엇인지, 어떤 방법이 있는지, 파이썬과 장고로는 어떻게 해야 하는지 등을 알아보고 제일 중요한(?)유닛테스트에 대해 자세히 포스팅해보려 한다.&lt;/p&gt;
 &lt;h3 id=&quot;테스트란&quot;&gt;&lt;a href=&quot;#%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%9E%80&quot; aria-label=&quot;테스트란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;테스트란?&lt;/h3&gt;
 &lt;p&gt;소프트웨어 테스트는 시스템 또는 애플리케이션이 주어진 조건하에 기대되는(개발목적에 맞게) 결과를 제공하는 가를 평가하는 것이다. 주어진 조건이란 정상적인/비정상적인 입력 모두를 의미하며, 각각의 경우에 기대되는 결과를 보여야 한다. &lt;/p&gt;
@@ -277,7 +407,77 @@ ex) 1234%30 = 나머지 값이 인덱싱의 주소가 됨
 &lt;a href=&quot;http://softwaretestingfundamentals.com/integration-testing/&quot;&gt;Software Testing Fundamentals&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=hAUjItE42cY&quot;&gt;파이썬 테스트 시작하기(유튜브)&lt;/a&gt;
 &lt;a href=&quot;https://www.slideshare.net/hosunglee948/python-52222334&quot;&gt;파이썬 테스트 시작하기(PPT)&lt;/a&gt;&lt;br&gt;
-위 두 자료는 2015년 파이콘에서 이호성 개발자님께서 발표에 썻던 자료와 발표를 한 영상을 담고 있고, 기초 부분을 이해할 때 참고하기 좋은 자료인 듯 보인다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python Class - 사용법]]></title><description><![CDATA[Python Class - How to use]]></description><link>http://seung-jae.github.io//posts/python/class2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/class2</guid><pubDate>Wed, 17 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;h2 id=&quot;클래스-사용법&quot;&gt;&lt;a href=&quot;#%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;클래스 사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;클래스 사용법&lt;/h2&gt;
+위 두 자료는 2015년 파이콘에서 이호성 개발자님께서 발표에 썻던 자료와 발표를 한 영상을 담고 있고, 기초 부분을 이해할 때 참고하기 좋은 자료인 듯 보인다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[What Is Data Sturcture?]]></title><description><![CDATA[What Is Data Sturcture?]]></description><link>http://seung-jae.github.io//posts/python/webtest</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/webtest</guid><pubDate>Thu, 18 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;자료구조란 데이터에 편리하게 접근하고, 변경하기 위해서 데이터를 저장하거나 조작하는 방법이며, 데이터의 목적에 따라 자료구조를 잘 선택해야 하기 때문에 각 자료구조의 장점과 한계를 잘 아는 것이 중요하다.  &lt;/p&gt;
+&lt;h3 id=&quot;단순구조&quot;&gt;&lt;a href=&quot;#%EB%8B%A8%EC%88%9C%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;단순구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;단순구조&lt;/h3&gt;
+&lt;p&gt;프로그래밍에서 사용되는 기본 데이터 타입&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Integer&lt;/li&gt;
+&lt;li&gt;Float&lt;/li&gt;
+&lt;li&gt;String&lt;/li&gt;
+&lt;li&gt;Boolean  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;비단순-구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EB%8B%A8%EC%88%9C-%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비단순 구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비단순 구조&lt;/h3&gt;
+&lt;p&gt;단순데이터를 저장하는 구조가 아닌 여러 데이터를 목적에 맞게 효과적으로 저장하는 자료 구조.
+Array: 파이썬에서 메모리를 효율적으로 사용할 때 사용
+순차적으로 데이터를 저장함, 실제로 메모리상에서 순차적으로 저장됨&lt;/p&gt;
+&lt;p&gt;multi dimentional array =&gt;
+리스트안에 리스트로 되어 있고,
+주로 매트릭스(벡터 계산)를 구현할 때, 장기판, 바둑판, 지도 등에서 사용됨&lt;/p&gt;
+&lt;p&gt;단점
+searching
+delete: 제일 앞이나 중간에 있는 데이터를 삭제할 때(순서를 지켜줘야 하니까 뒤에 있는걸 땡겨줘야 됨)&lt;/p&gt;
+&lt;p&gt;array resizing: 주소의 연결성을 확보하기 위해 리스트를 안써도 메모리는 데이터 공간을 확보해놓기 떄문에 리스트를 새로운 메모리로 넣어야 함&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;새로운 메모리를 만들었는데, 사이즈가 꽉 차서 넣을 자리가 없다면 다른 리스트를 만들어서 넣어주어야 함 &gt; 메모리상에서 일어나는 일이기 때문에 코드만으로는 확인할 수 없음 &gt; 시스템이 느려지는 이유 등의 요소임&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;애초에 할당을 크게 하던가, 링크 리스트라는 데이터 스트럭처를 사용해야 함
+링크드 리스트 데이터 스트럭처는 리스트인데 메모리상으로 순차적으로 저장이 안되도 순서대로 저장해줄 수 있는 자료구조임(포인터 같은걸로 연결함)
+클라스를 사용해서 연결한다는 걸 저장해놓고 nextval(포인터) &gt; Node로 연결시킴
+슬랙 참고&lt;/p&gt;
+&lt;p&gt;리사이징의 문제는 없음
+한 값이 모두 클라스여서 메모리를 많이 잡아 먹음(100개면 100개의 객체를 만들어야 하니까)&lt;/p&gt;
+&lt;p&gt;기회비용 &gt; 메모리, 시간 &gt; 일반적으로 메모리 금액이 저렴해서 시간을 더 중요시 함&lt;/p&gt;
+&lt;p&gt;더블 링크드 리스트는 앞뒤로 찾을 수 있음
+서퀴드 링크드 리스트는 돌면서 찾음 &gt; 2~3개 이상&lt;/p&gt;
+&lt;p&gt;수정삭제가 빈번할 때, (리사이징 확률이 높을 때 링크드 리스트를 사용하는 것이 좋음)
+arr가 효율이 제일 좋음
+데이터 저장에 대해 변수가 많을 때 사용됨&lt;/p&gt;
+&lt;p&gt;Tuple
+요소수가 리스트보다 적고, 2개~5개 사이에서 저장할 때만 씀
+간단한 데이터를 표현하고 싶을 때 사용됨(좌표같은 것을 사용할 때 좋음)
+튜플이 있으면 클라스를 따로 안만들어도 됨 (튜플이 훨씬기능적임)
+엘레멘트가 많아지면 그 다음부터 어떤 데이터인지 확인할 수 없기 때문에 5개 이상 안씀&lt;/p&gt;
+&lt;p&gt;named Tuple
+튜플인데 각각의 요소에 네임을 줌&lt;/p&gt;
+&lt;p&gt;set
+값을 숫자로 단방향 해쉬로 만들고 해쉬가 들어갈 수 있는 공간의 수와 나눔
+ex) 1234%30 = 나머지 값이 인덱싱의 주소가 됨
+해쉬 컴플릭트
+넘버 값이 아닌 다른 값이 인덱싱을 가능하게 해줌&lt;/p&gt;
+&lt;p&gt;해쉬충돌이 남 &gt; 해쉬충돌이 덜 나게 해야 됨 &gt;동일한 버켓에 링크드 리스트를 사용해서 저장함 &gt; 충돌이 덜 나게 코딩 해야 됨&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;이퀄&lt;/strong&gt; 위에 &lt;strong&gt;해쉬&lt;/strong&gt;함수가 있고, &lt;strong&gt;해쉬&lt;/strong&gt;함수는 메모리의 주소를 보는 것 &gt; 고급&lt;/p&gt;
+&lt;p&gt;키 값을 해쉬 기반으로 저장 &gt; 키를 해쉬화 해서 해당 버켓에 키와 값을 저장 &lt;/p&gt;
+&lt;p&gt;셋이나 딕셔너리도 마찬가지
+제일 빠른건 인덱싱을 찾는것 &gt; 룩업
+세트가 룩업이 제일 빠름&lt;/p&gt;
+&lt;p&gt;리스트 = O(n)
+세트 = O(1)&lt;/p&gt;
+&lt;h4 id=&quot;선형구조&quot;&gt;&lt;a href=&quot;#%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;선형구조&lt;/h4&gt;
+&lt;p&gt;저장되는 자료의 전후관계가 1:1 (리스트, 스택, 큐 등)&lt;/p&gt;
+&lt;h4 id=&quot;비선형구조&quot;&gt;&lt;a href=&quot;#%EB%B9%84%EC%84%A0%ED%98%95%EA%B5%AC%EC%A1%B0&quot; aria-label=&quot;비선형구조 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;비선형구조&lt;/h4&gt;
+&lt;p&gt;데이터 항목 사이의 관계가 1:n 또는 n:m(트리, 그래프 등)&lt;/p&gt;
+&lt;p&gt;데이터를 백엔드가 관리하니까 자료구조가 중요함 =&gt; 데이터를 효율적으로 관리하는게 중요
+기초적이라고 생각하기 때문에 면접볼때 많이 물어봄&lt;/p&gt;
+&lt;p&gt;알고리즘, 데이터 스트럭쳐 거기에 맞는 알고리즘과 알맞는 데이터구조를 쓰면 됨&lt;/p&gt;
+&lt;p&gt;mocking
+실제 클래스를 호출 안해도 간단하게 mocking클라스로 간단하게 테스트 할 수 있게 하는 것&lt;/p&gt;
+&lt;p&gt;patch &gt; 덧대는 것 &gt; 일반적인 마킹이 안될 떄 덧땜 &gt; 코드상 마킹하기 힘들 때 &gt; requests를 할 때 requests를 어떻게 할 지 어렵기 때문에 패치를 사용 함&lt;/p&gt;
+&lt;p&gt;requests라는 라이브러리를 직접 못 짜서 ?&lt;/p&gt;
+&lt;p&gt;테스트를 할 파일에서 사용될 테스트의 목을 만들어서 사용함 (user.views.requests)&lt;/p&gt;
+&lt;p&gt;난 패치를 건줄 알았는데 안걸려 있을 때 &gt; 패치하려던게 이미 값이 있을 때 &gt; 경로문제, 타이밍 문제가 많음&lt;/p&gt;
+&lt;p&gt;프린트 열라게 찍어봐야 됨&lt;/p&gt;
+&lt;p&gt;리베이스 스쿼시 마스터 위에 이쁘게 &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python Class - 사용법]]></title><description><![CDATA[Python Class - How to use]]></description><link>http://seung-jae.github.io//posts/python/class2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/class2</guid><pubDate>Wed, 17 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;h2 id=&quot;클래스-사용법&quot;&gt;&lt;a href=&quot;#%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;클래스 사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;클래스 사용법&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;전 시간에 클래스에 대해 알아봤는데, 이번엔 어떻게 써야 할지에 대해 자세히 알아보고자 한다.  &lt;/p&gt;
 &lt;p&gt;클래스 객체는 어트리뷰트 참조(클래스 내부의 변수나 함수에 접근)와 인스턴스(실체화)를 만든다&lt;/p&gt;
@@ -376,15 +576,17 @@ init&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;참고 사이트:&lt;br&gt;
 &lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;&lt;br&gt;
 &lt;a href=&quot;https://wikidocs.net/16071&quot;&gt;위키독스-파이썬기초&lt;/a&gt;
-&lt;a href=&quot;https://gomguard.tistory.com/125&quot;&gt;곰가드의 라이브러리&lt;/a&gt;  &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python Class]]></title><description><![CDATA[Python Class]]></description><link>http://seung-jae.github.io//posts/python/class</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/class</guid><pubDate>Sun, 14 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;h2 id=&quot;클래스란&quot;&gt;&lt;a href=&quot;#%ED%81%B4%EB%9E%98%EC%8A%A4%EB%9E%80&quot; aria-label=&quot;클래스란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;클래스란?&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;
-하나의 틀을 만들고, 메서드(클래스안에 정의된 함수)를 통해 인스턴스(실체)를 만들 수 있도록 하는 것. 또한, 이미 선언된 클래스를 다른 클래스로 상속하여 클래스의 내용을 추가하거나 수정하여 인스턴스를 생성할 수 있음&lt;br&gt;
+&lt;a href=&quot;https://gomguard.tistory.com/125&quot;&gt;곰가드의 라이브러리&lt;/a&gt;  &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python Class]]></title><description><![CDATA[Python Class]]></description><link>http://seung-jae.github.io//posts/python/class</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/class</guid><pubDate>Sun, 14 Jul 2019 08:46:37 GMT</pubDate><content:encoded>&lt;p&gt;초기 프로그래밍 언어는 절차지향적 프로그램 언어로 클래스라는 개념이 없었다.
+최근에는 클래스를 이용한 객체지향 프로그래밍이 컴퓨터 프로그래밍 분야에서 기본적인 개발 패러다임으로 자리를 잡았고, 파이썬에도 클래스라는 것을 이용한 객체지향프로그래밍을 할 수 있다.&lt;/p&gt;
+&lt;p&gt;객체지향 프로그래밍을 사용하면 일상생활에서 생각한 논리대로 코딩을 할 수 있기 때문에 객발과 유지보수가 간편해진다고 한다. &lt;/p&gt;
+&lt;h2 id=&quot;클래스란&quot;&gt;&lt;a href=&quot;#%ED%81%B4%EB%9E%98%EC%8A%A4%EB%9E%80&quot; aria-label=&quot;클래스란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;클래스란?&lt;/h2&gt;
+&lt;p&gt;하나의 틀을 만들고, 메서드(클래스안에 정의된 함수)를 통해 인스턴스(실체)를 만들 수 있도록 하는 것. 또한, 이미 선언된 클래스를 다른 클래스로 상속하여 클래스의 내용을 추가하거나 수정하여 인스턴스를 생성할 수 있음&lt;br&gt;
 객체 지향형 프로그래밍의 모든 표준 기능들을 제공   &lt;/p&gt;
 &lt;p&gt;요약: 어떤 문제를 해결하기 위한 데이터를 만들고, 추상화를 거쳐 집단에 속하는 속성(attribute)과 행위(behavior)를 통한 변수와 메서드로 정의한 것&lt;/p&gt;
 &lt;h3 id=&quot;사용법&quot;&gt;&lt;a href=&quot;#%EC%82%AC%EC%9A%A9%EB%B2%95&quot; aria-label=&quot;사용법 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;사용법&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;기본적으로 클래스 정의로 인해  만들어진 지역스코프에 여러 함수 및 변수를 담아서 사용&lt;/p&gt;
+&lt;p&gt;기본적으로 클래스 정의로 인해 만들어진 지역스코프에 여러 함수 및 변수를 담아서 사용&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/blockquote&gt;
 &lt;ol start=&quot;0&quot;&gt;
@@ -435,7 +637,8 @@ e.name           # &amp;#39;Buddy&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 오버로딩: 같은 이름의 함수를 여러개 정의하고, 매개변수의 타입과 개수를 다르게 하여 매개변수에 따라 다르게 호출할 수 하는 것&lt;/p&gt;
 &lt;p&gt;참고&lt;br&gt;
 &lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;    &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://jeong-pro.tistory.com/95?category=793347&quot;&gt;기본기를 쌓는 정아마추어 코딩블로그&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Django 소셜로그인(google, kakao) 구현]]></title><description><![CDATA[Django + React로 웹사이트를 제작할 때 별도의 라이브러리를 사용하지 않고 구글 및 카카오 소셜로그인을 구현]]></description><link>http://seung-jae.github.io//posts/djangsociallogin/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/djangsociallogin/</guid><pubDate>Sat, 13 Jul 2019 19:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Wecode에서 진행하는 첫번재 프로젝트에서 소셜로그인과 회원가입을 구현해봤다.&lt;br&gt;
+&lt;p&gt;&lt;a href=&quot;https://jeong-pro.tistory.com/95?category=793347&quot;&gt;기본기를 쌓는 정아마추어 코딩블로그&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;https://docs.python.org/ko/3/tutorial/classes.html&quot;&gt;파이썬 공식문서&lt;/a&gt;   &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Django 소셜로그인(google, kakao) 구현]]></title><description><![CDATA[Django + React로 웹사이트를 제작할 때 별도의 라이브러리를 사용하지 않고 구글 및 카카오 소셜로그인을 구현]]></description><link>http://seung-jae.github.io//posts/djangsociallogin/</link><guid isPermaLink="false">http://seung-jae.github.io//posts/djangsociallogin/</guid><pubDate>Sat, 13 Jul 2019 19:46:37 GMT</pubDate><content:encoded>&lt;p&gt;Wecode에서 진행하는 첫번재 프로젝트에서 소셜로그인과 회원가입을 구현해봤다.&lt;br&gt;
 자체 회원가입 및 로그인을 해봤기 때문에 비슷하다고 생각해서 금방 끝날 줄 알았는데 오산이였다. 프론트엔드에서 google과 kakao토큰을 전달받은 후 사용자 정보를 받는 것을 해봤고, 그와 관련된 포스팅을 남긴다.
 (별도의 라이브러리를 이용하지 않아서 코드가 길고 복잡할 수 있으며, 블로그를 보기 전에 충분히 혼자서 고민해보고 어떤 로직으로 돌아가는지 봐줬으면 한다.)&lt;/p&gt;
 &lt;hr&gt;
