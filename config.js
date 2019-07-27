@@ -26,9 +26,9 @@ module.exports = {
   author: {
     name: 'Seung Jae Lee',
     photo: '/photo.jpg',
-    bio: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
+    bio: 'Backend Developer',
     contacts: {
-      email: '#',
+      email: 'suengjae@gmail.com',
       telegram: '#',
       twitter: '#',
       github: '#',
