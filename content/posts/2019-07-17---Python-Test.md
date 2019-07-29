@@ -1,5 +1,5 @@
 ---
-title: Python & Django Test 
+title: System Test 
 date: "2019-07-18T08:46:37.121Z"
 template: "post"
 draft: false
