@@ -1,4 +1,425 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Mon, 29 Jul 2019 15:11:38 GMT</lastBuildDate><item><title><![CDATA[Python Mocking Test(mock, patch)]]></title><description><![CDATA[Python Mocking Test]]></description><link>http://seung-jae.github.io//posts/python/Django/test2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/Django/test2</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by John Doe]]></title><description><![CDATA[Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.]]></description><link>http://seung-jae.github.io/</link><generator>RSS for Node</generator><lastBuildDate>Thu, 01 Aug 2019 14:38:57 GMT</lastBuildDate><item><title><![CDATA[Python Mocking Test(mock, patch)]]></title><description><![CDATA[Python Mocking Test]]></description><link>http://seung-jae.github.io//posts/python/Django/test2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/Django/test2</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;일전에 블로깅 했던 &lt;a href=&quot;https://koreanblacklee.github.io/posts/python/test&quot;&gt;System Test&lt;/a&gt;에서 얘기한 Mock 테스트에 대해 더 알아보고자 한다.&lt;/p&gt;
+&lt;h3 id=&quot;why-unit-testing-is-important&quot;&gt;&lt;a href=&quot;#why-unit-testing-is-important&quot; aria-label=&quot;why unit testing is important permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Why Unit Testing is Important?&lt;/h3&gt;
+&lt;p&gt;모듈이나 애플리케이션 안에 있는 개별적인 코드들의 &lt;strong&gt;가장 작은 단위&lt;/strong&gt;에서 코드들이 원하는대로 작동하는지 테스트하는 것을 Unittest라고 하며, 유닛테스트는,  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;각각의 코드들이 어떤 동작을 하는지 생각하는데 도움을 준다.&lt;/li&gt;
+&lt;li&gt;버그를 찾고, 버그를 고쳤을 때 문제가 없는지를 확인한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;각각의 코드들이 문제가 없는지, 효율적인지, 버그수정 후 이상없는지 등을 확인하기 위한 테스트&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;what-is-mock&quot;&gt;&lt;a href=&quot;#what-is-mock&quot; aria-label=&quot;what is mock permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What is Mock?&lt;/h3&gt;
+&lt;p&gt;실제 객체를 만들기엔 비용이나 시간이 많이 들거나 &lt;strong&gt;의존성이 걸처져 있어&lt;/strong&gt; 제대로 구현하기 어려울 경우, 유닛테스트를 하기 위해 response되야 할 &lt;strong&gt;거짓된&lt;/strong&gt; 객체를 직접 만들어 테스트를 한다고 생각하면 된다.&lt;/p&gt;
+&lt;h3 id=&quot;when-should-use-mock&quot;&gt;&lt;a href=&quot;#when-should-use-mock&quot; aria-label=&quot;when should use mock permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;When should use Mock?&lt;/h3&gt;
+&lt;p&gt;유닛테스트를 하다 보면 테스트를 하기 위해 실제로 실행할 수 없는 코드들이 있다.&lt;br&gt;
+예를 들어, SMS 문자, 결제 API, 플랫폼 소셜 로그인 등이 있을 수 있다.
+즉, 외부 API를 실제로 호출하게 되면 결제가 되고, 문자가 보내지는 등 테스트를 위한 추가적인 시간과 비용이 발생할 수 있는 코드들을 테스트 하기 위해서 &lt;code class=&quot;language-text&quot;&gt;Mock&lt;/code&gt;(거짓된 값)을 이용한 테스트를 시행한다.&lt;br&gt;
+Stackoverflow나 구글링을 해보면 많은 설명과 사례들이 있으니 시간내서 보는 것도 좋을 듯 하다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/3622455/what-is-the-purpose-of-mock-objects&quot;&gt;stackoverflow: What is the purpose of mock objects?&lt;/a&gt;&lt;br&gt;
+(좀 오래된 듯 하지만 답변에 mock테스트 관련해서 기본적인 개념이 잘 설명되 있는 듯 해서 퍼왔다.(물론 크롬번역을 통해서 봤지만,,,))&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;테스트 환경을 구축하기 어려운 경우, 특정경우나 의존적인 경우, 테스트 시간이 오래 걸리는 경우 등의 이유로 사용된다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;Mock을 사용하기 위해 &lt;code class=&quot;language-text&quot;&gt;Patch&lt;/code&gt;라는 것을 사용해야 되며(물론 안쓸 때도 있긴 하겠지만 난 썻다.) Patch가 어떤건지 알아보자.  &lt;/p&gt;
+&lt;h3 id=&quot;what-is-patch&quot;&gt;&lt;a href=&quot;#what-is-patch&quot; aria-label=&quot;what is patch permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What is Patch?&lt;/h3&gt;
+&lt;p&gt;쉽게 말해 영어로 “땜빵”이라는 뜻이다. 원래는 옷에 뚫린 구멍을 기우는데 쓰는 천 쪼가리를 패치라고 부르며, 여기에선 런타임 시 속성을 동적으로 대체하는 것을 말한다.&lt;br&gt;
+예를 들어, 이번에 포스팅 예제로 쓰일 카카오톡 소셜로그인의 로직을 정리하면,&lt;br&gt;
+제작 중인 웹사이트에서 카카오톡 소셜로그인을 이용하기 위해선,(백엔드 기준) &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;프론트엔드에서 받은 access_token을 카카오톡 API로 보내고 &lt;/li&gt;
+&lt;li&gt;requests모듈을 통해 받은 사용자의 정보를 확인하고,  &lt;/li&gt;
+&lt;li&gt;데이터에 &lt;code class=&quot;language-text&quot;&gt;True&lt;/code&gt;이거나 &lt;code class=&quot;language-text&quot;&gt;False&lt;/code&gt;일 때 코딩한대로(원하는대로) 흘러가는지 테스트를 하기 위해선 아래와 같은 patch를 사용하면 된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;@patch(&amp;quot;account.views.requests&amp;quot;)&lt;/code&gt;(account앱에서 views.py에 있는 requests모듈을 패치할 것이라는 뜻)&lt;/p&gt;
+&lt;h3 id=&quot;how-to-mocking-test&quot;&gt;&lt;a href=&quot;#how-to-mocking-test&quot; aria-label=&quot;how to mocking test permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;How to Mocking Test?&lt;/h3&gt;
+&lt;p&gt;그럼 어떻게 테스트를 해야 하는지 아래 코드를 통해 확인해보자&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;구축환경: 장고 2.2, python 3.7 &lt;/li&gt;
+&lt;li&gt;홈페이지 관리자의 카카오톡 소셜로그인을 하는 코드를 테스트하기 위해 작성&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;로직-순서&quot;&gt;&lt;a href=&quot;#%EB%A1%9C%EC%A7%81-%EC%88%9C%EC%84%9C&quot; aria-label=&quot;로직 순서 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;로직 순서&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;views.py&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;소셜로그인 코드 작성(최초 request는 프론트엔드에서 카카오톡 &lt;code class=&quot;language-text&quot;&gt;access token&lt;/code&gt;을 전달 받음)&lt;/li&gt;
+&lt;li&gt;카카오톡 토큰을 카카오톡 API로 보내 사용자의정보를 &lt;code class=&quot;language-text&quot;&gt;requests&lt;/code&gt; 요청 (추후 이 부분을 mocking할 것임)&lt;/li&gt;
+&lt;li&gt;카카오톡에서 받은 정보 중 &lt;code class=&quot;language-text&quot;&gt;nickname&lt;/code&gt;이 DB에 동일한 관리자가 있는지 확인(특수한 경우로 보통 카카오 ID을 기준으로 함)&lt;a href=&quot;https://koreanblacklee.github.io/posts/djangsociallogin/&quot;&gt;구글,카카오 소셜로그인&lt;/a&gt; 페이지 확인&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;nickname&lt;/code&gt;이 같은 관리자가 존재하고, 해당 관리자가 카카오톡으로 회원가입 했는지 확인(카카오톡 에서 받은 정보 중 &lt;code class=&quot;language-text&quot;&gt;id&lt;/code&gt;가 고유값이기 떄문에 해당 값을 이용해서 파악)&lt;/li&gt;
+&lt;li&gt;기존에 가입했다면 바로 로그인, 가입하지 않았다면 Employee Table에 저장(&lt;strong&gt;본래 관리자 중에 동일한 이름이 없을 경우 예외처리를 해주어야 하지만, 해당 부분은 제외했습니다.&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tests.py&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;테스트를 위해 &lt;code class=&quot;language-text&quot;&gt;EmployeeTest&lt;/code&gt;클래스를 만들고 &lt;code class=&quot;language-text&quot;&gt;setUp&lt;/code&gt;(EB에 가짜 사용자를 create함), &lt;code class=&quot;language-text&quot;&gt;tearDown&lt;/code&gt;(하나의 테스트함수가 실행된 후 해당 테스트의 데이터 삭제하는 함수로 setUp함수와 함께 사용된다고 알면 된다.)를 만든다.&lt;/li&gt;
+&lt;li&gt;테스트 class안에 &lt;code class=&quot;language-text&quot;&gt;test_employee_kakao_account&lt;/code&gt;작성 및 &lt;code class=&quot;language-text&quot;&gt;@patch(&amp;quot;account.views.requests&amp;quot;)&lt;/code&gt; 데코레이터 작성&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;MockedResponse&lt;/code&gt;mock test에 사용할 class 작성(카카오톡에서 얻을 정보 중 활용할 정보들을 작성)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;MagicMock(return_value = MockedResponse)&lt;/code&gt;을 requests.post 함수에 저장&lt;/li&gt;
+&lt;li&gt;나머지는 기존 테스트 코드와 동일한 코드이기 때문에별도의 설명 생략함.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;필수사항&lt;/strong&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;각 클래스와 함수별로 기능을 작성해두었고, 나머지는 코드를 보고 이해하면서 공부를 해보길 바란다.  &lt;/li&gt;
+&lt;li&gt;코드가 길어서 눈에 안들어올 수 있고, 어떤 뜻인지 모를 수 있지만 차근차근 보다보면 이해되니 끈기를 갖고 봐보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;주의사항&lt;/strong&gt;&lt;br&gt;
+patch가 어디서 어떻게 작동될지 모르기 때문에(?)생각한대로 나오는지 계속 print를 찍어보면서 확인해야 한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#views.py
+import json
+import bcrypt
+import jwt
+import requests
+
+from settings       import SECRET_KEY, EXP_TIME
+from account.models import Employee
+feom django.views   import View
+from django.http    import JsonResponse
+
+
+class EmployeeSocialLoginView(View): #카카오톡 소셜로그인을 위한 클래스
+
+    @employee_login_required # employee가 로그인 상태인지 확인하기 위한 데코레이터
+    def post(self, request): # frontend에 post로 카카오톡 소셜로그인 토큰을 request 받음
+
+        #토큰을 이용해서 카카오톡에 사용자 정보 확인 요청(requests가 핵심)
+        access_token = request.headers[&amp;quot;Authorization&amp;quot;]
+        headers      = ({&amp;#39;Authorization&amp;#39; : f&amp;quot;Bearer {access_token}&amp;quot;})
+        url          = &amp;quot;https://kapi.kakao.com/v1/user/me&amp;quot;
+        response     = requests.post(url, headers=headers, timeout=3)
+        employee     = response.json()
+        exp_time = EXP_TIME
+
+        # 관리자가(employee) 기존에 카카오톡 계정이 DB에 저장되어 있는지 확인
+        if Employee.objects.filter(kakao_id = employee[&amp;quot;id&amp;quot;]).exists():
+            exp_time = EXP_TIME
+            siren_secret = SECRET_KEY
+
+            employee_data = Employee.objects.get(kakao_id = employee[&amp;quot;id&amp;quot;])
+            encoded_jwt = jwt.encode({&amp;quot;employee_id&amp;quot;:employee_data.id, &amp;#39;exp&amp;#39;:exp_time}, siren_secret, algorithm=&amp;quot;HS256&amp;quot;)
+
+            login_check = Login(
+                employee = Employee.objects.get(employee_code=employee_data.employee_code)
+            )
+            login_check.save()
+
+            return JsonResponse(
+                {
+                    &amp;#39;access_token&amp;#39; : encoded_jwt.decode(&amp;#39;UTF-8&amp;#39;),
+                    &amp;#39;name&amp;#39;         : employee_data.name,
+                    &amp;#39;message&amp;#39;      : &amp;#39;SUCCESS&amp;#39;
+                }, status = 200
+            )
+
+        #저장되어 있지 않다면 DB에 저장
+        else:
+            employee_info = Employee.objects.get(name=employee[&amp;#39;properties&amp;#39;][&amp;#39;nickname&amp;#39;])
+            employee_info.kakao_id = employee[&amp;quot;id&amp;quot;]
+            employee_info.save()
+
+            return JsonResponse(
+                {
+                    &amp;quot;message&amp;quot;: &amp;quot;SUCCESS&amp;quot;
+                }, status = 200
+            )&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#tests.py
+import json
+from account.models import Employee
+from django.test    import TestCase, Client
+from unittest.mock  import patch, MagicMock
+
+#setUp, tearDown을 통한 사전설정 
+class EmployeeTest(TestCase):
+    def setUp(self):
+        bytes_pw = bytes(&amp;#39;1234&amp;#39;, &amp;#39;utf-8&amp;#39;)
+        hashed_pw = bcrypt.hashpw(bytes_pw, bcrypt.gensalt())
+        Employee.objects.create(
+            name          = &amp;#39;아이유&amp;#39;,
+            user_id       = &amp;#39;100011&amp;#39;,
+            password      = hashed_pw.decode(&amp;#39;UTF-8&amp;#39;),
+            phone_number  = &amp;#39;010-1234-1111&amp;#39;,
+           )
+
+    def tearDown(self):
+        Employee.objects.filter(name=&amp;#39;아이유&amp;#39;).delete()
+
+
+    #patch, MagicMock을 이용한 테스트
+    @patch(&amp;quot;account.views.requests&amp;quot;)
+    def test_employee_kakao_account(self, mocked_requests):
+        c = Client()
+
+        class MockedResponse:
+            def json(self):
+                return {
+                    &amp;quot;id&amp;quot; : &amp;quot;12345&amp;quot;,
+                    &amp;quot;properties&amp;quot; : {
+                        &amp;quot;nickname&amp;quot; : &amp;quot;아이유&amp;quot;
+                    }
+                }
+
+        mocked_requests.post = MagicMock(return_value = MockedResponse())
+
+        test = {
+            &amp;#39;employee_code&amp;#39;:&amp;#39;1000111&amp;#39;,
+            &amp;#39;password&amp;#39;:&amp;#39;1234&amp;#39;,
+            &amp;#39;nickname&amp;#39; : &amp;#39;아이유&amp;#39;
+        }
+
+        response = c.post(&amp;quot;/account/employee/kakao&amp;quot;, json.dumps(test), **{&amp;quot;HTTP_AUTHORIZATION&amp;quot;:&amp;quot;1234&amp;quot;,&amp;quot;content_type&amp;quot; : &amp;quot;application/json&amp;quot;})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(),
+                {
+                    &amp;#39;message&amp;#39; : &amp;#39;SUCCESS&amp;#39;
+                }
+        )&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;참고&lt;br&gt;
+&lt;a href=&quot;https://blog.leop0ld.org/posts/about-mocking/&quot;&gt;Mock&lt;/a&gt; : 오브젝트들을 동적으로 대체하고 사용결과를 확인하기 위한 다양한 기능들을 제공, 의존성이 잇는 것들을 실제로 실행시키지 않고 호출여부, 인터페이스를 확인할 수 있다.&lt;br&gt;
+&lt;a href=&quot;https://gist.github.com/evansde77/45467f5a7af84d2a2d34f3fcb357449c&quot;&gt;mock_requests&lt;/a&gt; 원본&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[REST API란?]]></title><description><![CDATA[REST API]]></description><link>http://seung-jae.github.io//posts/restapi</link><guid isPermaLink="false">http://seung-jae.github.io//posts/restapi</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
+&lt;p&gt;본 내용은 위 유투브를 바탕으로 정리한 내용이며, 영상을 보는 겻을 추천한다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;프로그램 개발을 공부하면서 REST API라는 단어는 자주 들었는데, API라는건 알겠는데 REST는 정확히 어떤것을 뜻하는지 잘 몰랐기에 위 유투브 영상과 다른 사이트들을 참고하여 블로깅을 하려 한다.&lt;/p&gt;
+&lt;h3 id=&quot;rest란&quot;&gt;&lt;a href=&quot;#rest%EB%9E%80&quot; aria-label=&quot;rest란 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;REST란?&lt;/h3&gt;
+&lt;p&gt;컴퓨터 시스템간의 상호운영성을 제공하는 것 중에 하나&lt;/p&gt;
+&lt;h3 id=&quot;rest의-역사유래&quot;&gt;&lt;a href=&quot;#rest%EC%9D%98-%EC%97%AD%EC%82%AC%EC%9C%A0%EB%9E%98&quot; aria-label=&quot;rest의 역사유래 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;REST의 역사(유래)&lt;/h3&gt;
+&lt;p&gt;1991년 월드 와이드 웹이 나왔을 때 정보공유를 해야 하는데, 어떻게 하면 잘 할수 있을까 라는 고민을 시작으로
+모든 정보들을 하이퍼텍스트로 연결하기로 하여 아래와 같은 것을
+표현 형식: HTML(Hyper Text Markup Language) - TCP/IP기반
+식별자: URI(Uniform Resource Identifier) - 인터넷에 있는 자원 나타내는 유일한 주소(고유한 주소)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;URL과의 차이점: URL은 자원(파일)의 위치(구체적인 주소)를 알려주기 위한 규약이다. 흔히 웹사이트 주소로 알고 있지만, 주소뿐만 아니라 컴퓨터 네트워크상의 자원을 모두 나타낼 수 있다.
+전송방법: HTTP(프로토콜)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하이퍼텍스트 문서를 교환하기 위해 만들어진 통신규약&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;request/response 구조로 되어 있고, stateless형태(여러 요청과 응답에 대해 연결되어 있지 않다.)&lt;/li&gt;
+&lt;li&gt;Method(GET,POST 등)&lt;/li&gt;
+&lt;li&gt;Request target(ex: /login)&lt;/li&gt;
+&lt;li&gt;HTTP Version&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;로이필딩이 HTTP 1.0 작업에 참여 : 기존의 호환성의 문제를 부딪혔는데 어떻게 하면 웹을 망가트리지 않고, HTTP를 증폭시킬 수 있을까&lt;/p&gt;
+&lt;p&gt;HTTP Objects model을 만듬 &gt; 4년 후 Rest가 됨 &gt; 2000년도에 나옴&lt;/p&gt;
+&lt;p&gt;API
+마이크로 소프트가 XML-RPC 원격으로 다른 시스템의 메소드를 호출할 수 있는 프로토콜을 만듬  &gt; SOAP
+salesforce에서 2000년 2월에 최초로 API를 SOAP을 사용해서 공개함 &gt; 복잡해서 인기가 없었음
+flickr API SOAP과 REST로 두개의 형식으로 만듬&lt;/p&gt;
+&lt;p&gt;SOAP      | REST
+복잡하다    | 단순하다.
+규칙이 많다 |  규칙적음
+어렵다     |  쉽다(초기엔 쉬운줄 알았다.)&lt;/p&gt;
+&lt;p&gt;결국 SOAP은 하락하고, REST가 급상승하게 됨 REST의 승리&lt;/p&gt;
+&lt;p&gt;REST API는 버저닝을 하지 않는게 최고의 버저닝임&lt;/p&gt;
+&lt;p&gt;REST API &gt; REST 아키텍처 스타일을 따르는 API
+REST &gt; 분산 하이퍼 미디어 시스템을 위한 아키텍쳐 스타일
+아키텍쳐 스타일 &gt; 제약조건의 집함(모든 제약조건을 지켜야 REST를 따른다고 함)
+REST를 구성하는 스타일
+client-server&lt;br&gt;
+stateless&lt;br&gt;
+cache&lt;br&gt;
+uniform interface  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;identification of resources&lt;/li&gt;
+&lt;li&gt;manipulation of resources through representations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;self-descriptive messages&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;hypermedia as the engine of application state (HATEOAS)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;uniform-interface&quot;&gt;&lt;a href=&quot;#uniform-interface&quot; aria-label=&quot;uniform interface permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;uniform interface&lt;/h3&gt;
+&lt;p&gt;uniform interface가 필요한 이유
+&lt;strong&gt;독립적 진화를 하기 위해서 필요함&lt;/strong&gt;
+서버와 클라이언트가 독립적이어야 함
+서버의 기능이 바뀌어도(API변경(추가, 수정 삭제), URI변경 등 ) 클라이언트의 업데이트가 없어야 함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;identification of resources: 리소스가 URI로 식별되면 된다.&lt;/li&gt;
+&lt;li&gt;manipulation of resources through representations : 리소스를 만들거나 업데이트 하거나 삭제할 때 HTTP 메세지에 표현을 담아서 전송을 통해서 달성하면(조작하면) 된다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;self-descriptive messages&lt;/strong&gt; : 메세지는 스스로를 설명해야 한다. &gt;
+예를 들어 &lt;code class=&quot;language-text&quot;&gt;GET / HTTP/1.1&lt;/code&gt;이라는 요청메세지가 있다면,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;GET / HTTP/1.1
+Host: www.example.org&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;목적지를 추가해야 self-descriptive를 지킨다고 할 수 있다.
+또한,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;HTTP/1.1 200 OK
+[ { &amp;quot;op&amp;quot;: &amp;quot;remove&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;a/b/c&amp;quot;} ]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;일 때, 어떤 문법으로 작성되어 있는 건지 모르기 때문에 REST API라 부를 수 없으며, 아래와 같이 출력되어야 한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;HTTP/1.1 200 OK
+Content-Type: application/json/json-patch+json # 미디어 타입의 json
+[ { &amp;quot;op&amp;quot;: &amp;quot;remove&amp;quot;, &amp;quot;path&amp;quot;: &amp;quot;a/b/c&amp;quot;} ]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;어떤 타입인지 명시를 해줘야 한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;메세지를 봤을 때 메세지의 내용으로 온전히 해석이 가능해야 한다. 하지만 오늘날에는 잘 못지켜지고 있음&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;hypermedia as the engine of application state (HATEOAS)&lt;/strong&gt;
+현재의 URI에서 다음 URI를 명세했는지?(표현된 링크를 통해 다음 상태로 전이될 수 있는지를 보고 만족유무를 판단)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;layered system&lt;br&gt;
+code-on-demand(optional) 서버에서 코드를 클라이언트에게 보내서 실행할 수 있어야 함 (JAVASCRIPT)&lt;/p&gt;
+&lt;p&gt;웹 애플리케이션에서는 REST API라고 부를 수 있을 만큼 잘 지켜지고 있지만, 모바일 앱 애플리케이션은 잘 안지켜지고 있다고 한다.   &lt;/p&gt;
+&lt;p&gt;웹은,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;웹 페이지를 변경했다고 웹 브라우저를 업데이트할 필요는 없다.  &lt;/li&gt;
+&lt;li&gt;웹 브라우저를 업데이트했다고 웹 페이지를 변경할 필요도 없다.  &lt;/li&gt;
+&lt;li&gt;HTTP 명세가 변경되어도 웹은 잘 작동한다.  &lt;/li&gt;
+&lt;li&gt;HTML 명세가 변경되어도 웹은 잘 작동한다.  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;모바일 웹은 문제를 업데이트를 하면 문제가 되고 있음
+서버가 기능을 변경했는데, 클라이언트가 호환성을 지원해주는게 한계가 있고, 잦을 때도 있다.&lt;br&gt;
+&lt;strong&gt;REST API&lt;/strong&gt; 를 따르고 있지 않다고 보면 됨&lt;/p&gt;
+&lt;p&gt;결론: 웹은 이런 일이 거의 없지만 모바일 웹에서는 잦은 일이다.&lt;/p&gt;
+&lt;p&gt;웹이 잘 작동하는 이유&lt;br&gt;
+상호운용성(interoperability)에 대한 직착 때문임&lt;br&gt;
+버전업이 아닌 문서를 수정하고 보완하는데도 많은 시간을 소비(10년 정도)하고, 하위 호환을 하기 위해 수많은 개발자 들이 머리를 싸매고 꾸준한 노력을 하기 때문임&lt;br&gt;
+하위호환: 예를 들어 현재 Rederer, charset 등 오타가 났고, 잘못 지은 이름이지만 수정하게 되면 상호운영성이 깨져기 때문임  &lt;/p&gt;
+&lt;h3 id=&quot;rest가-웹의-독립적-진화에-도음을-주었는가&quot;&gt;&lt;a href=&quot;#rest%EA%B0%80-%EC%9B%B9%EC%9D%98-%EB%8F%85%EB%A6%BD%EC%A0%81-%EC%A7%84%ED%99%94%EC%97%90-%EB%8F%84%EC%9D%8C%EC%9D%84-%EC%A3%BC%EC%97%88%EB%8A%94%EA%B0%80&quot; aria-label=&quot;rest가 웹의 독립적 진화에 도음을 주었는가 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;REST가 웹의 독립적 진화에 도음을 주었는가??&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP에 지속적으로 영향을 줌&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Host 헤더 추가&lt;/li&gt;
+&lt;li&gt;길이 제한을 다루는 방법이 명시&lt;/li&gt;
+&lt;li&gt;URI에서 리소스의 정의가 추상적으로 변경됨: “식별하고자 하는 무언가” &gt; 예전에는 문서의 위치가 정의되었었음&lt;/li&gt;
+&lt;li&gt;기타 HTTP와 URI에 많은 영향을 줌&lt;/li&gt;
+&lt;li&gt;HTTP/1.1 명세 최신판에서 REST에 대한 언급이 들어감&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;rest가-성공했는가&quot;&gt;&lt;a href=&quot;#rest%EA%B0%80-%EC%84%B1%EA%B3%B5%ED%96%88%EB%8A%94%EA%B0%80&quot; aria-label=&quot;rest가 성공했는가 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;REST가 성공했는가?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;REST는 웹의 독립적 진화를 위해 만들어졌다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹은 독립적으로 진화하고 있다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;성공!!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;rest-api는&quot;&gt;&lt;a href=&quot;#rest-api%EB%8A%94&quot; aria-label=&quot;rest api는 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;REST API는?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;REST API는 REST 아키텍쳐 스타일을 따라야 한다.&lt;/li&gt;
+&lt;li&gt;오늘날 스스로 REST API라고 하는 API들의 대부분이 REST 아키텍쳐 스타일을 따르지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;제약-조건을-모두-지켜야-하는가&quot;&gt;&lt;a href=&quot;#%EC%A0%9C%EC%95%BD-%EC%A1%B0%EA%B1%B4%EC%9D%84-%EB%AA%A8%EB%91%90-%EC%A7%80%EC%BC%9C%EC%95%BC-%ED%95%98%EB%8A%94%EA%B0%80&quot; aria-label=&quot;제약 조건을 모두 지켜야 하는가 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;제약 조건을 모두 지켜야 하는가?&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;로이필드가 제약조건을 모두 지켜야 한다고 명시를 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;꼭-rest-api여야-하는건가&quot;&gt;&lt;a href=&quot;#%EA%BC%AD-rest-api%EC%97%AC%EC%95%BC-%ED%95%98%EB%8A%94%EA%B1%B4%EA%B0%80&quot; aria-label=&quot;꼭 rest api여야 하는건가 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;꼭 REST API여야 하는건가?&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;로이필드가 아니여도 상관없다고 한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;시스템 전체를 통제할 수 있다고 생각하거나, 진화에 관심이 없다면, REST에 대해 따지느라 시간을 낭비하지 마라&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;시스템 전체를 통제: 서버개발자가 클라이언트를 통제하거나, 혼자 모두 다 만들 수 있을 때
+진화에 관심이 없다는 것: 잦은 업데이트로 문제가 생겼다는 것을 듣고도 상관없다면,,&lt;/p&gt;
+&lt;h3 id=&quot;어떻게-해야-할까&quot;&gt;&lt;a href=&quot;#%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%A0%EA%B9%8C&quot; aria-label=&quot;어떻게 해야 할까 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;어떻게 해야 할까?&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;REST API를 구현하고 REST API라고 부른다.&lt;/li&gt;
+&lt;li&gt;REST API 구현을 포기하고  HTTP API라고 부른다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;REST API가 아니지만 REST API라고 부른다.(현재)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;웹은-잘-되는데-api는-왜-문제가-되는지&quot;&gt;&lt;a href=&quot;#%EC%9B%B9%EC%9D%80-%EC%9E%98-%EB%90%98%EB%8A%94%EB%8D%B0-api%EB%8A%94-%EC%99%9C-%EB%AC%B8%EC%A0%9C%EA%B0%80-%EB%90%98%EB%8A%94%EC%A7%80&quot; aria-label=&quot;웹은 잘 되는데 api는 왜 문제가 되는지 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;웹은 잘 되는데 API는 왜 문제가 되는지??&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTML과 JSON의 차이에 대해 알아야 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;문법 해석은 가능하지만 의미를 해석하려면 별도로 문서가(API문서 등) 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HTML의 경우&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;#예시
+GET / todos HTTP/1.1
+Host: example.org
+
+HTTP/1.1 200 OK
+Content-Type : text/html
+
+&amp;lt;html&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;a href=&amp;quot;https://todos/1&amp;quot;&amp;gt; 회사 가기&amp;lt;/a&amp;gt;
+&amp;lt;a href=&amp;quot;https://todos/2&amp;quot;&amp;gt; 집에 가기&amp;lt;/a&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;html&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Self-descriptive = 모든 태그의 해석방법이 구체적으로 나와 있고, 힌트만을 단서로 온전히 해석할 수 있음 &lt;strong&gt;SUCCESS&lt;/strong&gt;
+HATEOAS = a태그를 통해 다음 전이될 페이지를 명시함 &lt;strong&gt;SUCCESS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;JSON의 경우  &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;GET / todos HTTP/1.1
+Host:L exampele.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+[
+  {&amp;quot;id&amp;quot;: 1, &amp;quot;title&amp;quot;: &amp;quot;회사 가기&amp;quot;},
+  {&amp;quot;id&amp;quot;: 2, &amp;quot;title&amp;quot;: &amp;quot;집에 가기&amp;quot;},
+]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Self-descriptive = id가 무엇을 의미하는지, title이 무엇을 의미하는지 알 방법이 없음 &lt;strong&gt;FAIL&lt;/strong&gt;
+HATEOAS = 다음으로 전이될 페이지가 명시되어 있지 않다 &lt;strong&gt;FAIL&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;과연-두가지의-제약조건self-descriptive-hateoas가-독릭적인-진화에-어떻게-도움이-될까&quot;&gt;&lt;a href=&quot;#%EA%B3%BC%EC%97%B0-%EB%91%90%EA%B0%80%EC%A7%80%EC%9D%98-%EC%A0%9C%EC%95%BD%EC%A1%B0%EA%B1%B4self-descriptive-hateoas%EA%B0%80-%EB%8F%85%EB%A6%AD%EC%A0%81%EC%9D%B8-%EC%A7%84%ED%99%94%EC%97%90-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8F%84%EC%9B%80%EC%9D%B4-%EB%90%A0%EA%B9%8C&quot; aria-label=&quot;과연 두가지의 제약조건self descriptive hateoas가 독릭적인 진화에 어떻게 도움이 될까 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;과연 두가지의 제약조건(self-descriptive, HATEOAS)가 독릭적인 진화에 어떻게 도움이 될까?&lt;/h3&gt;
+&lt;p&gt;Self-descriptive: 확장 가능한 커뮤니케이션&lt;br&gt;
+서버나 클라이언트가 변경되더라도 오고가는 메세지는 언제나 해석이 가능하다  &lt;/p&gt;
+&lt;p&gt;HATEOAS : 애플리케이션 상태 전이의 late binding
+링크들을 동적(마음대로) 바꿀 수 있고, 서버가 바꿔도 클라이언트의 동작은 전혀 문제가 없다.&lt;/p&gt;
+&lt;h3 id=&quot;json-수정&quot;&gt;&lt;a href=&quot;#json-%EC%88%98%EC%A0%95&quot; aria-label=&quot;json 수정 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;JSON 수정&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;GET / todos HTTP/1.1
+Host:L exampele.org
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+[
+  {&amp;quot;id&amp;quot;: 1, &amp;quot;title&amp;quot;: &amp;quot;회사 가기&amp;quot;},
+  {&amp;quot;id&amp;quot;: 2, &amp;quot;title&amp;quot;: &amp;quot;집에 가기&amp;quot;},
+]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Self-descriptive&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Content-Type: application/vnd/todos+json으로 수정 후 IANA에 내용 등록&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;매번 media type을 정의해야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;headers에 &lt;code class=&quot;language-text&quot;&gt;Link: &amp;lt;https://example.org/docs/todos&amp;gt;; rel=&amp;quot;profile&amp;quot;&lt;/code&gt;을 명시하고, id가 어떤건지 명시하는 문서를 하나 작성한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;클라이언트가 link헤더와 프로필을 이해해야 한다. Content negotiation을 할 수 없다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;HATEOAS&lt;/p&gt;
+&lt;p&gt;본문에 링크를 추가해서 보내기 &gt; 링크표현 방법을 직접 정의해야 한다.(링크헤더에서 프로필을 정리, 문서에 정의)
+데이터에 다양한 방법으로 하이퍼링크를 표현 &gt;
+JSON으로 하이퍼링크를 표현하는 방법을 정의한 명세들을 활용 &gt; 기존 API를 많이 고쳐야 함(침투적)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;data, headers를 통해 활용해서 표현할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;정리
+오늘날 REST API는 사실 REST를 많이 따르지 않는다고 한다.
+REST의 제약조건 중 Self-descriptive와 HATEOAS를 만족하지 못한다.
+REST는 긴 시간에 걸쳐 진화하는 웹 애플리케이션을 위한 것이다.
+따를 것인지 스스로 판단하여 결정해야 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Self-descriptive와 HATEOAS를 만족시켜야 함&lt;br&gt;
+따르지 않을 경우 어떻게 부를것인지??&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;참고
+&lt;a href=&quot;https://www.youtube.com/watch?v=RP_f5dMoHFc&quot;&gt;그런 REST API로 괜찮은가?&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Python Mocking Test(mock, patch)]]></title><description><![CDATA[Python Mocking Test]]></description><link>http://seung-jae.github.io//posts/python/Django/test2</link><guid isPermaLink="false">http://seung-jae.github.io//posts/python/Django/test2</guid><pubDate>Invalid Date</pubDate><content:encoded>&lt;hr&gt;
 &lt;p&gt;일전에 블로깅 했던 &lt;a href=&quot;https://koreanblacklee.github.io/posts/python/test&quot;&gt;System Test&lt;/a&gt;에서 얘기한 Mock 테스트에 대해 더 알아보고자 한다.&lt;/p&gt;
 &lt;h3 id=&quot;why-unit-testing-is-important&quot;&gt;&lt;a href=&quot;#why-unit-testing-is-important&quot; aria-label=&quot;why unit testing is important permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Why Unit Testing is Important?&lt;/h3&gt;
 &lt;p&gt;모듈이나 애플리케이션 안에 있는 개별적인 코드들의 &lt;strong&gt;가장 작은 단위&lt;/strong&gt;에서 코드들이 원하는대로 작동하는지 테스트하는 것을 Unittest라고 하며, 유닛테스트는,  &lt;/p&gt;
