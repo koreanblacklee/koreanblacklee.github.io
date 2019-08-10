@@ -1,6 +1,6 @@
 ---
 title: 파이썬 기본 문법 정리(함수)
-date: "2019-07-23T012:46:37.121Z"
+date: "2019-07-23T12:46:37.121Z"
 template: "post"
 draft: false
 slug: "/posts/python/foundation3"

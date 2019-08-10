@@ -1,6 +1,6 @@
 ---
 title: Django를 활용한 유저 패스워드 변경(백엔드)
-date: "2019-07-25T012:46:37.121Z"
+date: "2019-07-25T12:46:37.121Z"
 template: "post"
 draft: false
 slug: "/posts/python/Django/userpwchange"

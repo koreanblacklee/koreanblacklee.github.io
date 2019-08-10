@@ -1,6 +1,6 @@
 ---
 title: Python Mocking Test(mock, patch)
-date: "2019-07-26T012:46:37.121Z"
+date: "2019-07-28T12:46:37.121Z"
 template: "post"
 draft: false
 slug: "/posts/python/Django/test2"
