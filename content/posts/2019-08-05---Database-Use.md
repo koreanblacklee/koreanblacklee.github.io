@@ -3,7 +3,7 @@ title: Database란?-2(schema)
 date: "2019-08-05T12:46:37.121Z"
 template: "post"
 draft: false
-slug: "/posts/database/"
+slug: "/posts/database/schema"
 category: "Database"
 tags:
   - "Database"
