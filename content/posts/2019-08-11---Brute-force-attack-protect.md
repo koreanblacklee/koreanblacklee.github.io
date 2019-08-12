@@ -121,22 +121,19 @@ class LoginLog(models.Model):
 
 ```logs/models.py
 
- @classmethod
-    def email_block_check(cls, user):
+    @classmethod
+    def block_ip(cls, user_ip):
+        # 같은 ip로 연속 10회 실패했을 경우 해당 ip 잠김
+        if user_ip:
 
-        logined_false_count = list(
-            LoginLog.objects.filter(user_email=user)
-            .order_by("-created_time")
-            .values_list("login_result", flat=True)[:5]
-        )
+            block_ip = BlackListIP.objects.filter(ip_address=user_ip)
 
-        if len(logined_false_count) >= 5:
-
-            User.objects.filter(user_email=user.user_email).update(
-                blocked_email=True,
-                blocked_time=timezone.now()
-            )
-
+            if len(block_ip) >= LOGIN_FAILED_IP_COUNT:
+                block_id = block_ip.order_by("-id")[0].id
+                BlackListIP.objects.filter(id=block_id).update(
+                    blocked_ip=True,
+                    blocked_time=timezone.now()
+                )
 
 ```
 
